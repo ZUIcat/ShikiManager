@@ -10,34 +10,41 @@ namespace HelperConfig {
         private static ConfigHelper instance;
 
         // Get instance
-        public static ConfigHelper Instance { get { if (instance == null) instance = new ConfigHelper(); return instance; } }
+        public static ConfigHelper Instance {
+            get {
+                if (instance == null)
+                    instance = new ConfigHelper();
+                return instance;
+            }
+        }
 
         // Const
-        private const string dataPathConst = @".\Data";
-        private const string configPathConst = @".\Data\Config.json";
+        private const string dataPath = @".\Data";
+        private const string appConfigFileName = "AppConfig.json";
+        private const string gameConfigFileName = "ShikiGameConfig.json";
 
         // Readonly
         private readonly string appBasePath;
-        private readonly string dataPath;
-        private readonly string configPath;
+        private readonly string appDataPath;
+        private readonly string appConfigPath;
         private readonly JsonSerializerOptions jsonSerializerOptions;
 
         // Value
-        private TotalConfig config;
+        private AppConfig appConfig;
 
         // Get Property
-        public TotalConfig Config { get => config; }
         public string AppBasePath { get => appBasePath; }
-        public string DataPath { get => dataPath; }
-        public string ConfigPath { get => configPath; }
+        public string AppDataPath { get => appDataPath; }
+        public string AppConfigPath { get => appConfigPath; }
+        public AppConfig AppConfig { get => appConfig; }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private ConfigHelper() {
             appBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            dataPath = Path.Combine(appBasePath, dataPathConst);
-            configPath = Path.Combine(appBasePath, configPathConst);
+#if DEBUG
+            appBasePath = Path.Combine(appBasePath, "../../../../");
+#endif
+            appDataPath = Path.Combine(appBasePath, dataPath);
+            appConfigPath = Path.Combine(appDataPath, appConfigFileName);
             jsonSerializerOptions = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true
@@ -45,24 +52,39 @@ namespace HelperConfig {
         }
 
         /// <summary>
-        /// Read config from local.
-        /// </summary>
-        public void ReadConfig() {
-            if (File.Exists(configPath)) {
-                string jsonString = File.ReadAllText(configPath);
-                config = JsonSerializer.Deserialize<TotalConfig>(jsonString, jsonSerializerOptions);
+        public AppConfig ReadAppConfig() {
+            if (File.Exists(appConfigPath)) {
+                string jsonString = File.ReadAllText(appConfigPath);
+                appConfig = JsonSerializer.Deserialize<AppConfig>(jsonString, jsonSerializerOptions);
             } else {
-                config = new TotalConfig();
+                appConfig = new AppConfig();
             }
+            return appConfig;
         }
 
-        /// <summary>
-        /// Write config to local.
-        /// </summary>
-        public void WriteConfig() {
-            Directory.CreateDirectory(dataPath);
-            string jsonString = JsonSerializer.Serialize<TotalConfig>(config, jsonSerializerOptions);
-            File.WriteAllText(configPath, jsonString);
+        public void WriteAppConfig() {
+            Directory.CreateDirectory(appDataPath);
+            string jsonString = JsonSerializer.Serialize<AppConfig>(appConfig, jsonSerializerOptions);
+            File.WriteAllText(appConfigPath, jsonString);
+        }
+
+        public ShikiGameConfig ReadGameConfig(string gameDirPath) {
+            ShikiGameConfig gameConfig;
+            string gameConfigPath = Path.Combine(gameDirPath, gameConfigFileName);
+            if (File.Exists(gameConfigPath)) {
+                string jsonString = File.ReadAllText(gameConfigPath);
+                gameConfig = JsonSerializer.Deserialize<ShikiGameConfig>(jsonString, jsonSerializerOptions);
+            } else {
+                gameConfig = new ShikiGameConfig();
+            }
+            return gameConfig;
+        }
+
+        public void WriteGameConfig(string gameDirPath, ShikiGameConfig gameConfig) {
+            string gameConfigPath = Path.Combine(gameDirPath, gameConfigFileName);
+            Directory.CreateDirectory(gameDirPath);
+            string jsonString = JsonSerializer.Serialize<ShikiGameConfig>(gameConfig, jsonSerializerOptions);
+            File.WriteAllText(gameConfigPath, jsonString);
         }
     }
 }

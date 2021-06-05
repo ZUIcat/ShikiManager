@@ -12,25 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
 using HelperConfig;
 
 namespace ShikiManager {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            MyLabel.Content = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-
+        private void Test01_Button_Click(object sender, RoutedEventArgs e) {
             Console.WriteLine("APP Start!");
-            ConfigHelper.Instance.ReadConfig();
-            ConfigHelper.Instance.WriteConfig();
+            ConfigHelper.Instance.ReadAppConfig();
+            ConfigHelper.Instance.WriteAppConfig();
             Console.WriteLine("APP End!");
+        }
+
+        private void Test02_Button_Click(object sender, RoutedEventArgs e) {
+            // Label01.Content = Environment.CurrentDirectory;
+            GameConfigWindow gameConfigWindow = new GameConfigWindow();
+            gameConfigWindow.Show();
         }
     }
 }
