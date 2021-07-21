@@ -1,0 +1,51 @@
+{
+  "id": "2598648",
+  "name": "ShikiManager",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15188514",
+      "name": "play",
+      "font_class": "play1",
+      "unicode": "e70b",
+      "unicode_decimal": 59147
+    },
+    {
+      "icon_id": "18366431",
+      "name": "play",
+      "font_class": "play2",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
+      "icon_id": "11982645",
+      "name": "Settings, control, options",
+      "font_class": "Settingscontroloptions",
+      "unicode": "e9cb",
+      "unicode_decimal": 59851
+    },
+    {
+      "icon_id": "11982708",
+      "name": "Settings, control, options",
+      "font_class": "Settingscontroloptions1",
+      "unicode": "e9d3",
+      "unicode_decimal": 59859
+    },
+    {
+      "icon_id": "16432288",
+      "name": "仓库",
+      "font_class": "cangku",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "16588085",
+      "name": "仓库",
+      "font_class": "cangku1",
+      "unicode": "e709",
+      "unicode_decimal": 59145
+    }
+  ]
+}

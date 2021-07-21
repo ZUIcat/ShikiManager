@@ -20,17 +20,11 @@ namespace ShikiManager {
             InitializeComponent();
         }
 
-        private void Test01_Button_Click(object sender, RoutedEventArgs e) {
+        private void Home_Btn_Click(object sender, RoutedEventArgs e) {
             Console.WriteLine("APP Start!");
             ConfigHelper.Instance.ReadAppConfig();
             ConfigHelper.Instance.WriteAppConfig();
             Console.WriteLine("APP End!");
-        }
-
-        private void Test02_Button_Click(object sender, RoutedEventArgs e) {
-            // Label01.Content = Environment.CurrentDirectory;
-            GameConfigWindow gameConfigWindow = new GameConfigWindow();
-            gameConfigWindow.Show();
         }
     }
 }

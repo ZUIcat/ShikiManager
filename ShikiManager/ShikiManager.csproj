@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="res\IconFont\iconfont.ttf" />
+    <None Remove="res\Test_Image_01.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="res\IconFont\iconfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="res\Test_Image_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HelperConfig\HelperConfig.csproj" />
   </ItemGroup>
 

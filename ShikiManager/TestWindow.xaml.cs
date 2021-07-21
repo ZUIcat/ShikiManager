@@ -14,10 +14,10 @@ using System.Windows.Shapes;
 
 namespace ShikiManager {
     /// <summary>
-    /// GameConfigWindow.xaml 的交互逻辑
+    /// TestWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class GameConfigWindow : Window {
-        public GameConfigWindow() {
+    public partial class TestWindow : Window {
+        public TestWindow() {
             InitializeComponent();
         }
     }

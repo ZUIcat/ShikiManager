@@ -42,6 +42,7 @@ namespace HelperConfig {
             appBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 #if DEBUG
             appBasePath = Path.Combine(appBasePath, "../../../../");
+            System.Windows.MessageBox.Show("Debug Mode.");
 #endif
             appDataPath = Path.Combine(appBasePath, dataPath);
             appConfigPath = Path.Combine(appDataPath, appConfigFileName);
@@ -51,7 +52,6 @@ namespace HelperConfig {
             };
         }
 
-        /// <summary>
         public AppConfig ReadAppConfig() {
             if (File.Exists(appConfigPath)) {
                 string jsonString = File.ReadAllText(appConfigPath);

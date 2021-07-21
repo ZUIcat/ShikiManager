@@ -3,17 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShikiManager", "ShikiManager\ShikiManager.csproj", "{F58134FD-4A2F-4B11-A660-C5CC63522A33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShikiManager", "ShikiManager\ShikiManager.csproj", "{F58134FD-4A2F-4B11-A660-C5CC63522A33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDEA2489-46A2-498A-A019-1E386A9D120D} = {CDEA2489-46A2-498A-A019-1E386A9D120D}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperConfig", "HelperConfig\HelperConfig.csproj", "{CDEA2489-46A2-498A-A019-1E386A9D120D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperConfig", "HelperConfig\HelperConfig.csproj", "{CDEA2489-46A2-498A-A019-1E386A9D120D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperLocaleEmulator", "HelperLocaleEmulator\HelperLocaleEmulator.csproj", "{F603DFD8-694A-4B52-AD68-1A903FA11173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperLocaleEmulator", "HelperLocaleEmulator\HelperLocaleEmulator.csproj", "{F603DFD8-694A-4B52-AD68-1A903FA11173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperMeCab", "HelperMeCab\HelperMeCab.csproj", "{0369B29C-F52C-4F0F-80C5-738C8F1E848B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperMeCab", "HelperMeCab\HelperMeCab.csproj", "{0369B29C-F52C-4F0F-80C5-738C8F1E848B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperNtleas", "HelperNtleas\HelperNtleas.csproj", "{11532283-1A06-4F3E-9C93-151690BE2AEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperNtleas", "HelperNtleas\HelperNtleas.csproj", "{11532283-1A06-4F3E-9C93-151690BE2AEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
