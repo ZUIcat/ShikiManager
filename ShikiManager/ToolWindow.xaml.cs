@@ -11,14 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace ShikiManager {
-    /// <summary>
-    /// TestWindow.xaml 的交互逻辑
-    /// </summary>
-    public partial class TestWindow : Window {
-        public TestWindow() {
+    public partial class ToolWindow : Window {
+        public ToolWindow() {
             InitializeComponent();
+        }
+
+        private void OnButton001Click(object sender, RoutedEventArgs e) {
+            TextBox001.Text = Convert.ToString(SystemParameters.PrimaryScreenHeight);
+            //Bitmap bitmap = new Bitmap(SystemParameters.PrimaryScreenHeight, SystemParameters.PrimaryScreenWidth);
         }
     }
 }

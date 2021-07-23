@@ -26,5 +26,10 @@ namespace ShikiManager {
             ConfigHelper.Instance.WriteAppConfig();
             Console.WriteLine("APP End!");
         }
+
+        private void OnTestButtonClick(object sender, RoutedEventArgs e) {
+            ToolWindow toolWindow = new ToolWindow();
+            toolWindow.Show();
+        }
     }
 }

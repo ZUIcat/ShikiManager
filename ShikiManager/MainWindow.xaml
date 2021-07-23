@@ -54,6 +54,7 @@
         <StackPanel Grid.Column="0">
             <Button Style="{StaticResource icon_btn}" Click="Home_Btn_Click">&#xe67f;</Button>
             <Button Style="{StaticResource icon_btn}">&#xe9cb;</Button>
+            <Button Style="{StaticResource icon_btn}" Click="OnTestButtonClick">T</Button>
         </StackPanel>
 
         <ScrollViewer Grid.Column="1">
