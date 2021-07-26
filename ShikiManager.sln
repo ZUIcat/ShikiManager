@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperNtleas", "HelperNtlea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperExternDll", "HelperExternDll\HelperExternDll.csproj", "{F57698D0-3D3E-4733-9F6C-FB5886FBF4F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51FA5ECE-7A9A-4D50-A14F-5DFEC6B7C951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57698D0-3D3E-4733-9F6C-FB5886FBF4F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57698D0-3D3E-4733-9F6C-FB5886FBF4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57698D0-3D3E-4733-9F6C-FB5886FBF4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57698D0-3D3E-4733-9F6C-FB5886FBF4F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

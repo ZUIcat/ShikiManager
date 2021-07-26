@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Drawing;
+using WindowsInput.Events;
 
 namespace ShikiManager {
     public partial class ToolWindow : Window {
@@ -19,9 +19,27 @@ namespace ShikiManager {
             InitializeComponent();
         }
 
-        private void OnButton001Click(object sender, RoutedEventArgs e) {
-            TextBox001.Text = Convert.ToString(SystemParameters.PrimaryScreenHeight);
-            //Bitmap bitmap = new Bitmap(SystemParameters.PrimaryScreenHeight, SystemParameters.PrimaryScreenWidth);
+        private async void OnButton001Click(object sender, RoutedEventArgs e) {
+            await WindowsInput.Simulate.Events().ClickChord(KeyCode.LWin, KeyCode.PrintScreen).Invoke();
+        }
+
+        private void OnButton002Click(object sender, RoutedEventArgs e) {
+
+        }
+        private void OnButton003Click(object sender, RoutedEventArgs e) {
+
+        }
+        private void OnButton004Click(object sender, RoutedEventArgs e) {
+
+        }
+        private void OnButton005Click(object sender, RoutedEventArgs e) {
+
+        }
+        private void OnButton006Click(object sender, RoutedEventArgs e) {
+
+        }
+        private void OnButton007Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
