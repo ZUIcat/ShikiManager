@@ -17,6 +17,18 @@ namespace ShikiManager {
     public partial class ToolWindow : Window {
         public ToolWindow() {
             InitializeComponent();
+
+            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            //this.Left = desktopWorkingArea.Right - this.Width;
+            //this.Top = desktopWorkingArea.Bottom - this.Height;
+            //MessageBox.Show(this.Width + "|" + this.Height);
+        }
+
+        private void OnToolWindowLoaded(object sender, RoutedEventArgs e) {
+            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            this.Left = desktopWorkingArea.Right - this.Width / 2;
+            this.Top = 0;
+            MessageBox.Show(this.Width + "|" + this.Height);
         }
 
         private async void OnButton001Click(object sender, RoutedEventArgs e) {

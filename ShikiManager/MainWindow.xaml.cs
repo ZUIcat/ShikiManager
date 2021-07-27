@@ -29,7 +29,6 @@ namespace ShikiManager {
 
         private void OnTestButtonClick(object sender, RoutedEventArgs e) {
             ToolWindow toolWindow = new ToolWindow();
-            toolWindow.WindowStartupLocation = WindowStartupLocation.Manual;
             toolWindow.Show();
         }
     }
