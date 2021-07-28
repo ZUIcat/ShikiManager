@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WindowsInput.Events;
+using HelperExternDll;
 
 namespace ShikiManager {
     public partial class ToolWindow : Window {
@@ -24,29 +25,12 @@ namespace ShikiManager {
             InitializeComponent();
         }
 
-        //
-        //https://www.haolizi.net/example/view_10390.html
-        [DllImport("user32.dll")]
-        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern UInt32 GetWindowLong(IntPtr hWnd, int nIndex);
-
-
-        private void mainwindows_Loaded() {
-            //以下代码不能放到构造函数里，否则窗体丙柄为0
-            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            IntPtr HWND = wndHelper.Handle;
-            int GWL_EXSTYLE = -20;
-
-            //GetWindowLong(HWND, GWL_EXSTYLE);
-
-            SetWindowLong(HWND, GWL_EXSTYLE, (IntPtr)(0x8000000)); //让当前窗体不**输入焦点
-        }
-        //
-
         private void OnToolWindowLoaded(object sender, RoutedEventArgs e) {
+            // 设置窗口位置
             SetWindowPosition(windowPos);
-            mainwindows_Loaded();
+            // 设置窗口不获取焦点
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            Winuser.SetWindowNoActivate(wndHelper.Handle);
         }
 
         #region Btn
@@ -74,14 +58,15 @@ namespace ShikiManager {
             _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.Down).Invoke();
         }
         private async void OnBtn06Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Forwards).Invoke();
+            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Up, 10).Invoke();
         }
         private async void OnBtn07Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Down).Invoke();
+            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Down, 10).Invoke();
         }
         #endregion
 
         #region Btn00CM
+        // https://www.haolizi.net/example/view_10390.html
         private void OnBtn00CMTopLeftClick(object sender, RoutedEventArgs e) {
             SetWindowPosition(1);
         }

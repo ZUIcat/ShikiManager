@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HelperConfig\HelperConfig.csproj" />
+    <ProjectReference Include="..\HelperExternDll\HelperExternDll.csproj" />
   </ItemGroup>
 
 </Project>
