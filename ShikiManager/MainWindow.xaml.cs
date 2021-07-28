@@ -16,6 +16,8 @@ using HelperConfig;
 
 namespace ShikiManager {
     public partial class MainWindow : Window {
+        private ToolWindow toolWindow;
+
         public MainWindow() {
             InitializeComponent();
         }
@@ -28,7 +30,9 @@ namespace ShikiManager {
         }
 
         private void OnTestButtonClick(object sender, RoutedEventArgs e) {
-            ToolWindow toolWindow = new ToolWindow();
+            if (toolWindow == null) {
+                toolWindow = new ToolWindow();
+            }
             toolWindow.Show();
         }
     }

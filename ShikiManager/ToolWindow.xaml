@@ -5,14 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
         mc:Ignorable="d"
-        Title="ToolWindow" Height="50" Width="500" WindowStyle="None" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Loaded="OnToolWindowLoaded">
-    <StackPanel Orientation="Horizontal">
-        <Button x:Name="Button001" MinWidth="50" MinHeight="50" Click="OnButton001Click">截屏</Button>
-        <Button x:Name="Button002" MinWidth="50" MinHeight="50" Click="OnButton002Click">Ctrl</Button>
-        <Button x:Name="Button003" MinWidth="50" MinHeight="50" Click="OnButton003Click">Space</Button>
-        <Button x:Name="Button004" MinWidth="50" MinHeight="50" Click="OnButton004Click">KeyUp</Button>
-        <Button x:Name="Button005" MinWidth="50" MinHeight="50" Click="OnButton005Click">KeyDown</Button>
-        <Button x:Name="Button006" MinWidth="50" MinHeight="50" Click="OnButton006Click">ScrollUp</Button>
-        <Button x:Name="Button007" MinWidth="50" MinHeight="50" Click="OnButton007Click">ScrollDown</Button>
+        Title="ToolWindow" Height="Auto" Width="Auto" WindowStyle="None" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Loaded="OnToolWindowLoaded">
+    <StackPanel x:Name="ToolStackPanel" Orientation="Horizontal">
+        <Button x:Name="Btn00" Width="50" Height="50" Click="OnBtn00Click" Content="Set">
+            <Button.ContextMenu>
+                <ContextMenu x:Name="Btn00CM">
+                    <MenuItem Header="TopLeft" Click="OnBtn00CMTopLeftClick"/>
+                    <MenuItem Header="TopMiddle" Click="OnBtn00CMTopMiddleClick"/>
+                    <MenuItem Header="TopRight" Click="OnBtn00CMTopRightClick"/>
+                    <MenuItem Header="RightTop" Click="OnBtn00CMRightTopClick"/>
+                    <MenuItem Header="RightMiddle" Click="OnBtn00CMRightMiddleClick"/>
+                    <MenuItem Header="RightButtom" Click="OnBtn00CMRightButtomClick"/>
+                    <MenuItem Header="ButtomRight" Click="OnBtn00CMButtomRightClick"/>
+                    <MenuItem Header="ButtomMiddle" Click="OnBtn00CMButtomMiddleClick"/>
+                    <MenuItem Header="ButtomLeft" Click="OnBtn00CMButtomLeftClick"/>
+                    <MenuItem Header="LeftButtom" Click="OnBtn00CMLeftButtomClick"/>
+                    <MenuItem Header="LeftMiddle" Click="OnBtn00CMLeftMiddleClick"/>
+                    <MenuItem Header="LeftTop" Click="OnBtn00CMLeftTopClick"/>
+                    <Separator/>
+                    <MenuItem Header="Hide" Click="OnBtn00CMHideClick"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button x:Name="Btn01" Width="50" Height="50" Click="OnBtn01Click" Content="PScreen"/>
+        <Button x:Name="Btn02" Width="50" Height="50" Click="OnBtn02Click" Content="Ctrl"/>
+        <Button x:Name="Btn03" Width="50" Height="50" Click="OnBtn03Click" Content="Space"/>
+        <Button x:Name="Btn04" Width="50" Height="50" Click="OnBtn04Click" Content="KUp"/>
+        <Button x:Name="Btn05" Width="50" Height="50" Click="OnBtn05Click" Content="KDown"/>
+        <Button x:Name="Btn06" Width="50" Height="50" Click="OnBtn06Click" Content="SUp"/>
+        <Button x:Name="Btn07" Width="50" Height="50" Click="OnBtn07Click" Content="SDown"/>
     </StackPanel>
 </Window>
