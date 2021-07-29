@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WindowsInput.Events;
 using HelperExternDll;
 
@@ -21,6 +8,9 @@ namespace ShikiManager {
     public partial class ToolWindow : Window {
         private int hideDir = 1;
         private int windowPos = 2;
+        private int centerScreenPosX = Winuser.GetPrimaryScreenWidth() / 2;
+        private int centerScreenPosY = Winuser.GetPrimaryScreenHeight() / 2;
+
         public ToolWindow() {
             InitializeComponent();
         }
@@ -37,31 +27,53 @@ namespace ShikiManager {
         private void OnBtn00Click(object sender, RoutedEventArgs e) {
             Btn00CM.IsOpen = true;
         }
-
         private async void OnBtn01Click(object sender, RoutedEventArgs e) {
             this.Hide();
-            _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.LWin, KeyCode.PrintScreen).Invoke();
-            await Task.Run(() => { Thread.Sleep(500); });
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.LWin, KeyCode.PrintScreen)
+                .Wait(500)
+                .Invoke();
             this.Show();
         }
-
         private async void OnBtn02Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.Control).Invoke();
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.Control)
+                .Invoke();
         }
         private async void OnBtn03Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.Space).Invoke();
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.Space)
+                .Invoke();
         }
         private async void OnBtn04Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.Up).Invoke();
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.Up)
+                .Invoke();
         }
         private async void OnBtn05Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().ClickChord(KeyCode.Down).Invoke();
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.Down)
+                .Invoke();
         }
         private async void OnBtn06Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Up, 10).Invoke();
+            Winuser.POINT curPos;
+            Winuser.GetCursorPos(out curPos);
+            await WindowsInput.Simulate.Events()
+                .MoveTo(centerScreenPosX, centerScreenPosY)
+                .Scroll(ButtonCode.VScroll, ButtonScrollDirection.Up)
+                .Wait(100)
+                .MoveTo(curPos.X, curPos.Y)
+                .Invoke();
         }
         private async void OnBtn07Click(object sender, RoutedEventArgs e) {
-            _ = await WindowsInput.Simulate.Events().Scroll(ButtonCode.VScroll, ButtonScrollDirection.Down, 10).Invoke();
+            Winuser.POINT curPos;
+            Winuser.GetCursorPos(out curPos);
+            await WindowsInput.Simulate.Events()
+                .MoveTo(centerScreenPosX, centerScreenPosY)
+                .Scroll(ButtonCode.VScroll, ButtonScrollDirection.Down)
+                .Wait(100)
+                .MoveTo(curPos.X, curPos.Y)
+                .Invoke();
         }
         #endregion
 
