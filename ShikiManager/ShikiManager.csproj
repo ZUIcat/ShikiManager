@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="WindowsInput" Version="6.3.0" />
   </ItemGroup>
 

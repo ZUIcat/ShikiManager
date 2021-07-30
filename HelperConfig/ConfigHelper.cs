@@ -7,10 +7,15 @@ using System.Text.Unicode;
 namespace HelperConfig {
     public class ConfigHelper {
         // Instance
-        private static ConfigHelper instance = new ConfigHelper();
+        private static ConfigHelper instance;
 
         // Get instance
-        public static ConfigHelper Instance { get; }
+        public static ConfigHelper Instance {
+            get {
+                if (instance == null) instance = new ConfigHelper();
+                return instance;
+            }
+        }
 
         // Const
         private const string dataPath = @".\Data";

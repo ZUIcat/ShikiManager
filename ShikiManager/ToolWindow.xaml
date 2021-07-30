@@ -5,7 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
         mc:Ignorable="d"
-        Title="ToolWindow" Height="Auto" Width="Auto" WindowStyle="None" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Loaded="OnToolWindowLoaded">
+        Title="ToolWindow"
+        Height="Auto"
+        Width="Auto"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Topmost="True"
+        WindowStartupLocation="Manual"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False"
+        Loaded="OnToolWindowLoaded">
     <StackPanel x:Name="ToolStackPanel" Orientation="Horizontal">
         <Button x:Name="Btn00" Width="50" Height="50" Click="OnBtn00Click" Content="Set">
             <Button.ContextMenu>
@@ -28,11 +37,12 @@
             </Button.ContextMenu>
         </Button>
         <Button x:Name="Btn01" Width="50" Height="50" Click="OnBtn01Click" Content="PScreen"/>
-        <Button x:Name="Btn02" Width="50" Height="50" Click="OnBtn02Click" Content="Ctrl"/>
-        <Button x:Name="Btn03" Width="50" Height="50" Click="OnBtn03Click" Content="Space"/>
-        <Button x:Name="Btn04" Width="50" Height="50" Click="OnBtn04Click" Content="KUp"/>
-        <Button x:Name="Btn05" Width="50" Height="50" Click="OnBtn05Click" Content="KDown"/>
+        <Button x:Name="Btn02" Width="50" Height="50" PreviewMouseDown="OnBtn02PreviewMouseDown" PreviewMouseUp="OnBtn02PreviewMouseUp" Content="Ctrl"/>
+        <Button x:Name="Btn03" Width="50" Height="50" PreviewMouseDown="OnBtn03PreviewMouseDown" PreviewMouseUp="OnBtn03PreviewMouseUp" Content="Space"/>
+        <Button x:Name="Btn04" Width="50" Height="50" PreviewMouseDown="OnBtn04PreviewMouseDown" PreviewMouseUp="OnBtn04PreviewMouseUp" Content="KUp"/>
+        <Button x:Name="Btn05" Width="50" Height="50" PreviewMouseDown="OnBtn05PreviewMouseDown" PreviewMouseUp="OnBtn05PreviewMouseUp" Content="KDown"/>
         <Button x:Name="Btn06" Width="50" Height="50" Click="OnBtn06Click" Content="SUp"/>
         <Button x:Name="Btn07" Width="50" Height="50" Click="OnBtn07Click" Content="SDown"/>
+        <Button x:Name="BtnTest" Width="50" Height="50" Click="OnBtnTestClick" Content="Test"/>
     </StackPanel>
 </Window>
