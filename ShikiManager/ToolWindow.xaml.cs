@@ -56,6 +56,9 @@ namespace ShikiManager {
                 .Release(KeyCode.Control)
                 .Invoke();
         }
+        private void PressKeyStateMachine(KeyCode key) {
+
+        }
         private async void OnBtn03PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await WindowsInput.Simulate.Events()
                 .Hold(KeyCode.Space)
@@ -69,24 +72,6 @@ namespace ShikiManager {
         private async void OnBtn04PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await WindowsInput.Simulate.Events()
                 .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Hold(KeyCode.Up)
-                .Wait(50)
-                .Release(KeyCode.Up)
                 .Invoke();
         }
         private async void OnBtn04PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
@@ -122,6 +107,16 @@ namespace ShikiManager {
                 .Scroll(ButtonCode.VScroll, ButtonScrollDirection.Down)
                 .Wait(100)
                 .MoveTo(curPos.X, curPos.Y)
+                .Invoke();
+        }
+        private async void OnBtn08Click(object sender, RoutedEventArgs e) {
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.Home)
+                .Invoke();
+        }
+        private async void OnBtn09Click(object sender, RoutedEventArgs e) {
+            await WindowsInput.Simulate.Events()
+                .ClickChord(KeyCode.End)
                 .Invoke();
         }
         private void OnBtnTestClick(object sender, RoutedEventArgs e) {
@@ -282,6 +277,10 @@ namespace ShikiManager {
                 default:
                     break;
             }
+        }
+
+        private void Btn09_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

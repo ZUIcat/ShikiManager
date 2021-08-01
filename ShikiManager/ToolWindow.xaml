@@ -19,6 +19,8 @@
         <Button x:Name="Btn00" Width="50" Height="50" Click="OnBtn00Click" Content="Set">
             <Button.ContextMenu>
                 <ContextMenu x:Name="Btn00CM">
+                    <MenuItem Header="None"/>
+                    <Separator/>
                     <MenuItem Header="TopLeft" Click="OnBtn00CMTopLeftClick"/>
                     <MenuItem Header="TopMiddle" Click="OnBtn00CMTopMiddleClick"/>
                     <MenuItem Header="TopRight" Click="OnBtn00CMTopRightClick"/>
@@ -43,6 +45,8 @@
         <Button x:Name="Btn05" Width="50" Height="50" PreviewMouseDown="OnBtn05PreviewMouseDown" PreviewMouseUp="OnBtn05PreviewMouseUp" Content="KDown"/>
         <Button x:Name="Btn06" Width="50" Height="50" Click="OnBtn06Click" Content="SUp"/>
         <Button x:Name="Btn07" Width="50" Height="50" Click="OnBtn07Click" Content="SDown"/>
+        <Button x:Name="Btn08" Width="50" Height="50" Click="OnBtn08Click" Content="Home"/>
+        <Button x:Name="Btn09" Width="50" Height="50" Click="OnBtn09Click" Content="End"/>
         <Button x:Name="BtnTest" Width="50" Height="50" Click="OnBtnTestClick" Content="Test"/>
     </StackPanel>
 </Window>
