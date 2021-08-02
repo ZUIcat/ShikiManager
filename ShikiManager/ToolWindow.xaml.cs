@@ -4,15 +4,24 @@ using System.Windows.Interop;
 using WindowsInput.Events;
 using HelperExternDll;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ShikiManager {
     public partial class ToolWindow : Window {
+        private static readonly int KEY_STEP_TIME = 100;
+        private static readonly int KEY_RRESS_TIME = 1000;
+
         private int hideDir;
         private int windowPos;
         private int screenWidth;
         private int screenHeight;
         private int centerScreenPosX;
         private int centerScreenPosY;
+
+        private Dictionary<KeyCode, bool> keyReleaseDic;
+        private object keyReleaseDicLock;
 
         public ToolWindow() {
             InitializeComponent();
@@ -24,6 +33,9 @@ namespace ShikiManager {
             screenHeight = Winuser.GetPrimaryScreenHeight();
             centerScreenPosX = screenWidth / 2;
             centerScreenPosY = screenHeight / 2;
+
+            keyReleaseDic = new Dictionary<KeyCode, bool>();
+            keyReleaseDicLock = new object();
         }
 
         private void OnToolWindowLoaded(object sender, RoutedEventArgs e) {
@@ -32,6 +44,40 @@ namespace ShikiManager {
             // 设置窗口不获取焦点
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             Winuser.SetWindowNoActivate(wndHelper.Handle);
+        }
+
+        /// <summary>
+        /// 按下指定按键. 按下并保持一定时间后就会反复产生按下事件.
+        /// </summary>
+        /// <param name="key">按键代码</param>
+        /// <returns></returns>
+        private async Task PressKey(KeyCode key) {
+            await WindowsInput.Simulate.Events().ClickChord(key).Invoke();
+            await Task.Run(async () => {
+                int accuTime = 0;
+                bool longState = false;
+                bool isRelease = false;
+                lock (keyReleaseDicLock) {
+                    keyReleaseDic[key] = false;
+                }
+                while (!isRelease) {
+                    if (!longState) { accuTime += KEY_STEP_TIME; }
+                    if (longState || accuTime >= KEY_RRESS_TIME) {
+                        longState = true;
+                        await WindowsInput.Simulate.Events().Hold(key).Invoke();
+                    }
+                    Thread.Sleep(KEY_STEP_TIME);
+                    lock (keyReleaseDicLock) {
+                        isRelease = keyReleaseDic.TryGetValue(key, out isRelease) && isRelease;
+                    }
+                }
+                if (longState) { await WindowsInput.Simulate.Events().Release(key).Invoke(); }
+            });
+        }
+        private void ReleaseKey(KeyCode key) {
+            lock (keyReleaseDicLock) {
+                keyReleaseDic[key] = true;
+            }
         }
 
         #region Btn
@@ -56,19 +102,14 @@ namespace ShikiManager {
                 .Release(KeyCode.Control)
                 .Invoke();
         }
-        private void PressKeyStateMachine(KeyCode key) {
 
+        private void OnBtn03PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            PressKey(KeyCode.Space);
         }
-        private async void OnBtn03PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Hold(KeyCode.Space)
-                .Invoke();
+        private void OnBtn03PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            ReleaseKey(KeyCode.Space);
         }
-        private async void OnBtn03PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Release(KeyCode.Space)
-                .Invoke();
-        }
+
         private async void OnBtn04PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await WindowsInput.Simulate.Events()
                 .Hold(KeyCode.Up)
@@ -119,17 +160,19 @@ namespace ShikiManager {
                 .ClickChord(KeyCode.End)
                 .Invoke();
         }
-        private void OnBtnTestClick(object sender, RoutedEventArgs e) {
+        private void OnBtnTest01Click(object sender, RoutedEventArgs e) {
             using (Bitmap cacheBitmap = new Bitmap(screenWidth, screenHeight)) {
                 Graphics g = Graphics.FromImage(cacheBitmap);
                 g.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(screenWidth, screenWidth));
                 cacheBitmap.Save(@"C:\Users\1\Desktop\aaa.jpg");
             }
         }
+        private void OnBtnTest02Click(object sender, RoutedEventArgs e) {
+        }
         #endregion
 
-        #region Btn00CM
         // https://www.haolizi.net/example/view_10390.html
+        #region Btn00CM
         private void OnBtn00CMTopLeftClick(object sender, RoutedEventArgs e) {
             SetWindowPosition(1);
         }

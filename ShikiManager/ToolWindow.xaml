@@ -47,6 +47,7 @@
         <Button x:Name="Btn07" Width="50" Height="50" Click="OnBtn07Click" Content="SDown"/>
         <Button x:Name="Btn08" Width="50" Height="50" Click="OnBtn08Click" Content="Home"/>
         <Button x:Name="Btn09" Width="50" Height="50" Click="OnBtn09Click" Content="End"/>
-        <Button x:Name="BtnTest" Width="50" Height="50" Click="OnBtnTestClick" Content="Test"/>
+        <Button x:Name="BtnTest01" Width="50" Height="50" Click="OnBtnTest01Click" Content="Test01"/>
+        <Button x:Name="BtnTest02" Width="50" Height="50" Click="OnBtnTest02Click" Content="Test02"/>
     </StackPanel>
 </Window>
