@@ -16,7 +16,7 @@
         ShowInTaskbar="False"
         Loaded="OnToolWindowLoaded">
     <StackPanel x:Name="ToolStackPanel" Orientation="Horizontal">
-        <Button x:Name="Btn00" Width="50" Height="50" Click="OnBtn00Click" Content="Set">
+        <Button Width="50" Height="50" Click="OnBtnSetClick" Content="Set">
             <Button.ContextMenu>
                 <ContextMenu x:Name="Btn00CM">
                     <MenuItem Header="None"/>
@@ -38,16 +38,18 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <Button x:Name="Btn01" Width="50" Height="50" Click="OnBtn01Click" Content="PScreen"/>
-        <Button x:Name="Btn02" Width="50" Height="50" PreviewMouseDown="OnBtn02PreviewMouseDown" PreviewMouseUp="OnBtn02PreviewMouseUp" Content="Ctrl"/>
-        <Button x:Name="Btn03" Width="50" Height="50" PreviewMouseDown="OnBtn03PreviewMouseDown" PreviewMouseUp="OnBtn03PreviewMouseUp" Content="Space"/>
-        <Button x:Name="Btn04" Width="50" Height="50" PreviewMouseDown="OnBtn04PreviewMouseDown" PreviewMouseUp="OnBtn04PreviewMouseUp" Content="KUp"/>
-        <Button x:Name="Btn05" Width="50" Height="50" PreviewMouseDown="OnBtn05PreviewMouseDown" PreviewMouseUp="OnBtn05PreviewMouseUp" Content="KDown"/>
-        <Button x:Name="Btn06" Width="50" Height="50" Click="OnBtn06Click" Content="SUp"/>
-        <Button x:Name="Btn07" Width="50" Height="50" Click="OnBtn07Click" Content="SDown"/>
-        <Button x:Name="Btn08" Width="50" Height="50" Click="OnBtn08Click" Content="Home"/>
-        <Button x:Name="Btn09" Width="50" Height="50" Click="OnBtn09Click" Content="End"/>
-        <Button x:Name="BtnTest01" Width="50" Height="50" Click="OnBtnTest01Click" Content="Test01"/>
-        <Button x:Name="BtnTest02" Width="50" Height="50" Click="OnBtnTest02Click" Content="Test02"/>
+        <Button Width="50" Height="50" Click="OnBtnPScreenClick" Content="PScreen"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnCtrlPreviewMouseDown" PreviewMouseUp="OnBtnCtrlPreviewMouseUp" Content="Ctrl"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnSpacePreviewMouseDown" PreviewMouseUp="OnBtnSpacePreviewMouseUp" Content="Space"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnKUpPreviewMouseDown" PreviewMouseUp="OnBtnKUpPreviewMouseUp" Content="KUp"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnKDownPreviewMouseDown" PreviewMouseUp="OnBtnKDownPreviewMouseUp" Content="KDown"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnHomePreviewMouseDown" PreviewMouseUp="OnBtnHomePreviewMouseUp" Content="Home"/>
+        <Button Width="50" Height="50" PreviewMouseDown="OnBtnEndPreviewMouseDown" PreviewMouseUp="OnBtnEndPreviewMouseUp" Content="End"/>
+        <Button Width="50" Height="50" Click="OnBtnMUpClick" Content="MUp"/>
+        <Button Width="50" Height="50" Click="OnBtnMDownClick" Content="MDown"/>
+        <Button Width="50" Height="50" Click="OnBtnMLeftClick" Content="MLeft"/>
+        <Button Width="50" Height="50" Click="OnBtnMRightClick" Content="MRight"/>
+        <Button Width="50" Height="50" Click="OnBtnTest01Click" Content="Test01"/>
+        <Button Width="50" Height="50" Click="OnBtnTest02Click" Content="Test02"/>
     </StackPanel>
 </Window>

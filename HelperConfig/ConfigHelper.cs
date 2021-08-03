@@ -6,43 +6,37 @@ using System.Text.Unicode;
 
 namespace HelperConfig {
     public class ConfigHelper {
-        // Instance
         private static ConfigHelper instance;
 
-        // Get instance
         public static ConfigHelper Instance {
             get {
-                if (instance == null) instance = new ConfigHelper();
+                if (instance == null) { instance = new ConfigHelper(); }
                 return instance;
             }
         }
 
-        // Const
         private const string dataPath = @".\Data";
         private const string appConfigFileName = "AppConfig.json";
         private const string gameConfigFileName = "ShikiGameConfig.json";
 
-        // Readonly
         private readonly string appBasePath;
         private readonly string appDataPath;
         private readonly string appConfigPath;
         private readonly JsonSerializerOptions jsonSerializerOptions;
 
-        // Value
-        private AppConfig appConfig;
-
-        // Get Property
         public string AppBasePath { get => appBasePath; }
         public string AppDataPath { get => appDataPath; }
         public string AppConfigPath { get => appConfigPath; }
+
+        private AppConfig appConfig;
         public AppConfig AppConfig { get => appConfig; }
 
         private ConfigHelper() {
             appBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-#if DEBUG
+            #if DEBUG
             appBasePath = Path.Combine(appBasePath, "../../../../");
             System.Windows.MessageBox.Show("Debug Mode.");
-#endif
+            #endif
             appDataPath = Path.Combine(appBasePath, dataPath);
             appConfigPath = Path.Combine(appDataPath, appConfigFileName);
             jsonSerializerOptions = new JsonSerializerOptions {

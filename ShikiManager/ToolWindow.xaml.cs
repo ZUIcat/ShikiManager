@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using WindowsInput.Events;
@@ -7,6 +8,9 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing.Imaging;
+using HelperConfig;
+using System.IO;
 
 namespace ShikiManager {
     public partial class ToolWindow : Window {
@@ -23,10 +27,11 @@ namespace ShikiManager {
         private Dictionary<KeyCode, bool> keyReleaseDic;
         private object keyReleaseDicLock;
 
+        private string screenshotSaveDir;
+
         public ToolWindow() {
             InitializeComponent();
 
-            // Value Init
             hideDir = 1;
             windowPos = 2;
             screenWidth = Winuser.GetPrimaryScreenWidth();
@@ -36,6 +41,15 @@ namespace ShikiManager {
 
             keyReleaseDic = new Dictionary<KeyCode, bool>();
             keyReleaseDicLock = new object();
+
+            ReadConfig();
+        }
+
+        private void ReadConfig() {
+            screenshotSaveDir = ConfigHelper.Instance.AppConfig.ScreenshotPath;
+            if (screenshotSaveDir.StartsWith(@".\")) {
+                screenshotSaveDir = Path.Combine(ConfigHelper.Instance.AppDataPath, screenshotSaveDir);
+            }
         }
 
         private void OnToolWindowLoaded(object sender, RoutedEventArgs e) {
@@ -74,6 +88,10 @@ namespace ShikiManager {
                 if (longState) { await WindowsInput.Simulate.Events().Release(key).Invoke(); }
             });
         }
+        /// <summary>
+        /// 释放指定按键.
+        /// </summary>
+        /// <param name="key">按键代码</param>
         private void ReleaseKey(KeyCode key) {
             lock (keyReleaseDicLock) {
                 keyReleaseDic[key] = true;
@@ -81,10 +99,11 @@ namespace ShikiManager {
         }
 
         #region Btn
-        private void OnBtn00Click(object sender, RoutedEventArgs e) {
+        private void OnBtnSetClick(object sender, RoutedEventArgs e) {
             Btn00CM.IsOpen = true;
         }
-        private async void OnBtn01Click(object sender, RoutedEventArgs e) {
+
+        private async void OnBtnPScreenClick(object sender, RoutedEventArgs e) {
             this.Hide();
             await WindowsInput.Simulate.Events()
                 .ClickChord(KeyCode.LWin, KeyCode.PrintScreen)
@@ -92,45 +111,54 @@ namespace ShikiManager {
                 .Invoke();
             this.Show();
         }
-        private async void OnBtn02PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+
+        private async void OnBtnCtrlPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await WindowsInput.Simulate.Events()
                 .Hold(KeyCode.Control)
                 .Invoke();
         }
-        private async void OnBtn02PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        private async void OnBtnCtrlPreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await WindowsInput.Simulate.Events()
                 .Release(KeyCode.Control)
                 .Invoke();
         }
 
-        private void OnBtn03PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            PressKey(KeyCode.Space);
+        private async void OnBtnSpacePreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            await PressKey(KeyCode.Space);
         }
-        private void OnBtn03PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        private void OnBtnSpacePreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             ReleaseKey(KeyCode.Space);
         }
 
-        private async void OnBtn04PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Hold(KeyCode.Up)
-                .Invoke();
+        private async void OnBtnKUpPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            await PressKey(KeyCode.Up);
         }
-        private async void OnBtn04PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Release(KeyCode.Up)
-                .Invoke();
+        private void OnBtnKUpPreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            ReleaseKey(KeyCode.Up);
         }
-        private async void OnBtn05PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Hold(KeyCode.Down)
-                .Invoke();
+
+        private async void OnBtnKDownPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            await PressKey(KeyCode.Down);
         }
-        private async void OnBtn05PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            await WindowsInput.Simulate.Events()
-                .Release(KeyCode.Down)
-                .Invoke();
+        private void OnBtnKDownPreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            ReleaseKey(KeyCode.Down);
         }
-        private async void OnBtn06Click(object sender, RoutedEventArgs e) {
+
+        private async void OnBtnHomePreviewMouseDown(object sender, RoutedEventArgs e) {
+            await PressKey(KeyCode.Home);
+        }        
+        private void OnBtnHomePreviewMouseUp(object sender, RoutedEventArgs e) {
+            ReleaseKey(KeyCode.Home);
+        }
+
+        private async void OnBtnEndPreviewMouseDown(object sender, RoutedEventArgs e) {
+            await PressKey(KeyCode.End);
+        }
+        private void OnBtnEndPreviewMouseUp(object sender, RoutedEventArgs e) {
+            ReleaseKey(KeyCode.End);
+        }
+
+        private async void OnBtnMUpClick(object sender, RoutedEventArgs e) {
             Winuser.POINT curPos;
             Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
@@ -140,7 +168,7 @@ namespace ShikiManager {
                 .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
         }
-        private async void OnBtn07Click(object sender, RoutedEventArgs e) {
+        private async void OnBtnMDownClick(object sender, RoutedEventArgs e) {
             Winuser.POINT curPos;
             Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
@@ -150,28 +178,43 @@ namespace ShikiManager {
                 .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
         }
-        private async void OnBtn08Click(object sender, RoutedEventArgs e) {
+
+        private async void OnBtnMLeftClick(object sender, RoutedEventArgs e) {
+            Winuser.POINT curPos;
+            Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
-                .ClickChord(KeyCode.Home)
+                .MoveTo(centerScreenPosX, centerScreenPosY)
+                .ClickChord(KeyCode.LButton)
+                .Wait(100)
+                .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
         }
-        private async void OnBtn09Click(object sender, RoutedEventArgs e) {
+        private async void OnBtnMRightClick(object sender, RoutedEventArgs e) {
+            Winuser.POINT curPos;
+            Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
-                .ClickChord(KeyCode.End)
+                .MoveTo(centerScreenPosX, centerScreenPosY)
+                .ClickChord(KeyCode.RButton)
+                .Wait(100)
+                .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
         }
+
         private void OnBtnTest01Click(object sender, RoutedEventArgs e) {
+            this.Hide();
             using (Bitmap cacheBitmap = new Bitmap(screenWidth, screenHeight)) {
                 Graphics g = Graphics.FromImage(cacheBitmap);
                 g.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(screenWidth, screenWidth));
-                cacheBitmap.Save(@"C:\Users\1\Desktop\aaa.jpg");
+                string imageSavePath = Path.Combine(screenshotSaveDir, System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ff") + ".png");
+                Directory.CreateDirectory(screenshotSaveDir);
+                cacheBitmap.Save(imageSavePath, ImageFormat.Png);
             }
+            this.Show();
         }
         private void OnBtnTest02Click(object sender, RoutedEventArgs e) {
         }
         #endregion
 
-        // https://www.haolizi.net/example/view_10390.html
         #region Btn00CM
         private void OnBtn00CMTopLeftClick(object sender, RoutedEventArgs e) {
             SetWindowPosition(1);
@@ -320,10 +363,6 @@ namespace ShikiManager {
                 default:
                     break;
             }
-        }
-
-        private void Btn09_Click(object sender, RoutedEventArgs e) {
-
         }
     }
 }

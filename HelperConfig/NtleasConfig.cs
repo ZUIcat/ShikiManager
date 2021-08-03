@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HelperConfig {
     public class NtleasConfig {
-        public string Path { get; set; }
+        public string DirPath { get; set; }
 
         public NtleasConfig() {
-            Path = @".\Data\Ntleas";
+            DirPath = @".\Ntleas";
         }
     }
 }

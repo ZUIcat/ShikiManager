@@ -14,6 +14,9 @@ namespace HelperConfig {
 
         public ShikiGameConfig() {
         }
+
+        public void HandleConfig() {
+        }
     }
 
     public class ExeConfig {
