@@ -130,6 +130,13 @@ namespace ShikiManager {
             ReleaseKey(KeyCode.Space);
         }
 
+        private async void OnBtnEnterPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            await PressKey(KeyCode.Enter);
+        }
+        private void OnBtnEnterPreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            ReleaseKey(KeyCode.Enter);
+        }
+
         private async void OnBtnKUpPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             await PressKey(KeyCode.Up);
         }
@@ -179,22 +186,12 @@ namespace ShikiManager {
                 .Invoke();
         }
 
-        private async void OnBtnMLeftClick(object sender, RoutedEventArgs e) {
-            Winuser.POINT curPos;
-            Winuser.GetCursorPos(out curPos);
-            await WindowsInput.Simulate.Events()
-                .MoveTo(centerScreenPosX, centerScreenPosY)
-                .ClickChord(KeyCode.LButton)
-                .Wait(100)
-                .MoveTo(curPos.X, curPos.Y)
-                .Invoke();
-        }
         private async void OnBtnMRightClick(object sender, RoutedEventArgs e) {
             Winuser.POINT curPos;
             Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
                 .MoveTo(centerScreenPosX, centerScreenPosY)
-                .ClickChord(KeyCode.RButton)
+                .ClickChord(KeyCode.Right)
                 .Wait(100)
                 .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
