@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
         mc:Ignorable="d"
-        Title="ToolWindow"
+        Name="TheToolWindow"
         Width="800"
         Height="100"
         SizeToContent="WidthAndHeight"
@@ -15,6 +15,20 @@
         WindowStartupLocation="Manual"
         ShowInTaskbar="False"
         Loaded="OnToolWindowLoaded">
+
+    <Window.Resources>
+        <Storyboard x:Key="ShowToolWindow">
+            <DoubleAnimation 
+                Storyboard.TargetName="TheToolWindow"
+                Storyboard.TargetProperty="Top"
+                Duration="00:00:00.50" From="{Binding ElementName=TheToolWindow, Path=Left}" To="0.0">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    
     <StackPanel x:Name="ToolStackPanel" Orientation="Horizontal">
         <Button Width="50" Height="30" Click="OnBtnSetClick" Content="Set">
             <Button.ContextMenu>
@@ -50,6 +64,12 @@
         <Button Width="50" Height="30" Click="OnBtnMDownClick" Content="MDown"/>
         <Button Width="50" Height="30" Click="OnBtnMRightClick" Content="MRight"/>
         <Button Width="50" Height="30" Click="OnBtnTest01Click" Content="Test01"/>
-        <Button Width="50" Height="30" Click="OnBtnTest02Click" Content="Test02"/>
+        <Button Width="50" Height="30" Click="OnBtnTest02Click" Content="Test02">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard Storyboard="{StaticResource ResourceKey=ShowToolWindow}"/>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
     </StackPanel>
 </Window>

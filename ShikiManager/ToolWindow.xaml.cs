@@ -66,7 +66,7 @@ namespace ShikiManager {
         /// <param name="key">按键代码</param>
         /// <returns></returns>
         private async Task PressKey(KeyCode key) {
-            await WindowsInput.Simulate.Events().ClickChord(key).Invoke();
+            await WindowsInput.Simulate.Events().Click(key).Invoke();
             await Task.Run(async () => {
                 int accuTime = 0;
                 bool longState = false;
@@ -191,7 +191,7 @@ namespace ShikiManager {
             Winuser.GetCursorPos(out curPos);
             await WindowsInput.Simulate.Events()
                 .MoveTo(centerScreenPosX, centerScreenPosY)
-                .ClickChord(KeyCode.Right)
+                .Click(ButtonCode.Right)
                 .Wait(100)
                 .MoveTo(curPos.X, curPos.Y)
                 .Invoke();
