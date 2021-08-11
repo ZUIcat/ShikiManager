@@ -5,20 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="ShikiManager v0.01" Height="680" Width="1240" WindowStartupLocation="CenterScreen">
+        Title="ShikiManager v0.01"
+        Height="680"
+        Width="1240"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-
-        <Style x:Key="icon_btn" TargetType="Button">
-            <Setter Property="FontFamily" Value="./res/IconFont/#iconfont"/>
-            <Setter Property="FontSize" Value="50"/>
-        </Style>
-
-        <Style x:Key="detail_font" TargetType="Label">
-            <Setter Property="FontFamily" Value="./res/IconFont/#iconfont"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-
         <DataTemplate x:Key="ListViewItemTemplate001">
             <Border BorderThickness="0,0,0,1" BorderBrush="Black">
                 <StackPanel Orientation="Horizontal">
@@ -32,7 +24,7 @@
                                             <ContentPresenter/>
                                         </ControlTemplate>
                                     </Setter.Value>
-                                </Setter>
+                                </Setter> 
                             </Style>
                         </ListView.ItemContainerStyle>
                         <Label BorderThickness="0" Content="Content" FontSize="10"/>
@@ -41,6 +33,61 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   StrokeDashArray="1 2"
+                                   SnapsToDevicePixels="true"
+                                   StrokeThickness="1"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="icon_btn" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#787878"/>
+            <Setter Property="FontFamily" Value="./res/IconFont/#iconfont"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsPressed" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="White"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Window.Resources>
 
@@ -51,7 +98,7 @@
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Background="#FF323232">
             <Button Style="{StaticResource icon_btn}" Click="Home_Btn_Click">&#xe67f;</Button>
             <Button Style="{StaticResource icon_btn}">&#xe9cb;</Button>
             <Button Style="{StaticResource icon_btn}" Click="OnTestButtonClick">T</Button>
@@ -80,7 +127,7 @@
                         <sys:String>ssss</sys:String>
                     </x:Array>
                 </ListView.ItemsSource>
-            <!--<ListView ItemTemplate="{DynamicResource ListViewItemTemplate001}" BorderThickness="0" ScrollViewer.CanContentScroll="True" Height="300">-->
+                <!--<ListView ItemTemplate="{DynamicResource ListViewItemTemplate001}" BorderThickness="0" ScrollViewer.CanContentScroll="True" Height="300">-->
                 <!--<ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Template">
