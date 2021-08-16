@@ -11,28 +11,6 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!--<DataTemplate x:Key="ListViewItemTemplate001">
-            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Label BorderThickness="0" Content="Title" FontWeight="Bold" FontSize="14"/>
-                    <ListView BorderThickness="0">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <ContentPresenter/>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter> 
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <Label BorderThickness="0" Content="Content" FontSize="10"/>
-                        <Label BorderThickness="0" Content="Content" FontSize="10"/>
-                    </ListView>
-                </StackPanel>
-            </Border>
-        </DataTemplate>-->
 
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -48,29 +26,29 @@
             </Setter>
         </Style>
 
-        <!--// 左侧 StackPanel //-->
-        <SolidColorBrush x:Key="StackPanel_Style_01.Static.Background" Color="#FF323232"/>
+        <!--// 左侧 Grid //-->
+        <SolidColorBrush x:Key="Grid_Style_01.Static.Background" Color="#FF323232"/>
 
-        <Style x:Key="StackPanel_Style_01" TargetType="{x:Type StackPanel}">
-            <Setter Property="Background" Value="{StaticResource StackPanel_Style_01.Static.Background}"/>
+        <Style x:Key="Grid_Style_01" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{StaticResource Grid_Style_01.Static.Background}"/>
         </Style>
-        <!--// 左侧 StackPanel //-->
+        <!--// 左侧 Grid //-->
 
-        <!--// 中间 StackPanel //-->
-        <SolidColorBrush x:Key="StackPanel_Style_02.Static.Background" Color="#FF464646"/>
+        <!--// 中间 Grid //-->
+        <SolidColorBrush x:Key="Grid_Style_02.Static.Background" Color="#FF464646"/>
 
-        <Style x:Key="StackPanel_Style_02" TargetType="{x:Type StackPanel}">
-            <Setter Property="Background" Value="{StaticResource StackPanel_Style_02.Static.Background}"/>
+        <Style x:Key="Grid_Style_02" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{StaticResource Grid_Style_02.Static.Background}"/>
         </Style>
-        <!--// 中间 StackPanel //-->
+        <!--// 中间 Grid //-->
 
-        <!--// 右侧 StackPanel //-->
-        <SolidColorBrush x:Key="StackPanel_Style_03.Static.Background" Color="#FF323232"/>
+        <!--// 右侧 Grid //-->
+        <SolidColorBrush x:Key="Grid_Style_03.Static.Background" Color="#FF323232"/>
 
-        <Style x:Key="StackPanel_Style_03" TargetType="{x:Type StackPanel}">
-            <Setter Property="Background" Value="{StaticResource StackPanel_Style_03.Static.Background}"/>
+        <Style x:Key="Grid_Style_03" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{StaticResource Grid_Style_03.Static.Background}"/>
         </Style>
-        <!--// 右侧 StackPanel //-->
+        <!--// 右侧 Grid //-->
 
         <!--// 左侧 Button //-->
         <SolidColorBrush x:Key="Button_Style_Icon_01.Static.Foreground" Color="#787878"/>
@@ -136,10 +114,10 @@
             <Setter Property="Foreground" Value="{StaticResource ListView_Style_01.Static.Foreground}"/>
             <Setter Property="Background" Value="{StaticResource ListView_Style_01.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ListView_Style_01.Static.BorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
             <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
             <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -150,7 +128,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                Padding="1"
+                                Padding="0"
                                 SnapsToDevicePixels="true">
                             <ScrollViewer Focusable="false"
                                           Padding="{TemplateBinding Padding}">
@@ -163,13 +141,6 @@
                                 <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListView_Style_01.Disabled.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListView_Style_01.Disabled.Border}"/>
                             </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsGrouping" Value="true"/>
-                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -181,15 +152,15 @@
         <SolidColorBrush x:Key="ListViewItem_Style_01.Static.Foreground" Color="#FF8C8C8C"/>
         <SolidColorBrush x:Key="ListViewItem_Style_01.Static.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ListViewItem_Style_01.Static.BorderBrush" Color="Transparent"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Foreground" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.BorderBrush" Color="White"/>
+        <!--<SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Foreground" Color="White"/>-->
+        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Background" Color="#19FFFFFF"/>
+        <!--<SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.BorderBrush" Color="White"/>-->
         <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Foreground" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.BorderBrush" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Foreground" Color="LightGray"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.BorderBrush" Color="LightGray"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Background" Color="#33FFFFFF"/>
+        <!--<SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.BorderBrush" Color="White"/>-->
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Foreground" Color="White"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Background" Color="#26FFFFFF"/>
+        <!--<SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.BorderBrush" Color="LightGray"/>-->
 
         <Style x:Key="ListViewItem_Style_01" TargetType="{x:Type ListViewItem}">
             <Setter Property="Background" Value="{StaticResource ListViewItem_Style_01.Static.Background}"/>
@@ -197,10 +168,10 @@
             <Setter Property="BorderBrush" Value="{StaticResource ListViewItem_Style_01.Static.BorderBrush}"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="Padding" Value="10, 10"/>
+            <Setter Property="Padding" Value="8, 8"/>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -217,21 +188,23 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.MouseOver.Foreground}"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.MouseOver.Background}"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                     <Condition Property="IsSelected" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedActive.BorderBrush}"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedActive.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedActive.Foreground}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                     <Condition Property="IsSelected" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedInactive.BorderBrush}"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedInactive.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ListViewItem_Style_01.SelectedInactive.Foreground}"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -239,7 +212,6 @@
             </Setter>
         </Style>
         <!--// 中间 ListItem //-->
-
 
     </Window.Resources>
 
@@ -250,49 +222,102 @@
             <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Style="{DynamicResource StackPanel_Style_01}" Grid.Column="0">
-            <Button Style="{StaticResource Button_Style_Icon_01}" Click="Home_Btn_Click">&#xe67f;</Button>
-            <Button Style="{StaticResource Button_Style_Icon_01}">&#xe9cb;</Button>
-            <Button Style="{StaticResource Button_Style_Icon_01}" Click="OnTestButtonClick">T</Button>
-        </StackPanel>
+        <Grid Style="{DynamicResource Grid_Style_01}" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Style="{DynamicResource StackPanel_Style_02}" Grid.Column="1">
-            <Label FontSize="18" Foreground="Red" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="1" Width="830">=== ToolBar ===</Label>
-            <ListView Style="{StaticResource ListView_Style_01}" Grid.Column="1">
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
-                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[DL]"/>
+            <Button Grid.Row="0" Style="{StaticResource Button_Style_Icon_01}" Click="Home_Btn_Click">&#xe67f;</Button>
+            <Button Grid.Row="1" Style="{StaticResource Button_Style_Icon_01}">&#xe9cb;</Button>
+            <Button Grid.Row="2" Style="{StaticResource Button_Style_Icon_01}" Click="OnTestButtonClick">T</Button>
+        </Grid>
+
+        <Grid Style="{DynamicResource Grid_Style_02}" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontSize="18" Foreground="Red" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="1" Width="820">=== ToolBar ===</Label>
+            <ListView Grid.Row="1" Style="{StaticResource ListView_Style_01}">
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20100430]アッチむいて恋[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20111028]恋愛0キロメートル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20130426]ひとつ飛ばし恋愛[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20150424]プラマイウォーズ[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20161125]スキとスキとでサンカク恋愛[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20180330]かりぐらし恋愛[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20190726]恋愛、借りちゃいました[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20201127]恋愛×ロワイアル[Package]"/>
             </ListView>
-        </StackPanel>
+        </Grid>
 
-        <StackPanel Style="{DynamicResource StackPanel_Style_03}" Grid.Column="2">
-            <!--<Image Source="./res/Test_Image_01.png"/>-->
-            <ListView BorderThickness="0" ScrollViewer.CanContentScroll="True" Height="300" Background="Transparent">
+        <Grid Style="{DynamicResource Grid_Style_03}" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="1" BorderThickness="0" Background="Transparent">
                 <ListView.ItemsSource>
                     <x:Array Type="sys:String">
                         <sys:String>ssss</sys:String>
                         <sys:String>ssss</sys:String>
                         <sys:String>ssss</sys:String>
+                        <sys:String>ssss</sys:String>
+                        <sys:String>ssss</sys:String>
+                        <sys:String>ssss</sys:String>
+                        <sys:String>ssss</sys:String>
+                        <sys:String>ssss</sys:String>
                     </x:Array>
                 </ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="White">
+                            <StackPanel Orientation="Horizontal">
+                                <Label BorderThickness="0" Content="Title" FontWeight="Bold" FontSize="14" Foreground="White"/>
+                                <ListView BorderThickness="0">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                        <ContentPresenter/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <Label BorderThickness="0" Content="Content" FontSize="10"/>
+                                    <Label BorderThickness="0" Content="Content" FontSize="10"/>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>
