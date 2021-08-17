@@ -35,7 +35,7 @@
         <!--// 左侧 Grid //-->
 
         <!--// 中间 Grid //-->
-        <SolidColorBrush x:Key="Grid_Style_02.Static.Background" Color="#FF464646"/>
+        <SolidColorBrush x:Key="Grid_Style_02.Static.Background" Color="Azure"/>
 
         <Style x:Key="Grid_Style_02" TargetType="{x:Type Grid}">
             <Setter Property="Background" Value="{StaticResource Grid_Style_02.Static.Background}"/>
@@ -43,7 +43,7 @@
         <!--// 中间 Grid //-->
 
         <!--// 右侧 Grid //-->
-        <SolidColorBrush x:Key="Grid_Style_03.Static.Background" Color="#FF323232"/>
+        <SolidColorBrush x:Key="Grid_Style_03.Static.Background" Color="Azure"/>
 
         <Style x:Key="Grid_Style_03" TargetType="{x:Type Grid}">
             <Setter Property="Background" Value="{StaticResource Grid_Style_03.Static.Background}"/>
@@ -100,7 +100,7 @@
         <!--// 左侧 Button //-->
 
         <!--// 中间 ListView //-->
-        <SolidColorBrush x:Key="ListView_Style_01.Static.Foreground" Color="#787878"/>
+        <SolidColorBrush x:Key="ListView_Style_01.Static.Foreground" Color="Transparent"/>
         <SolidColorBrush x:Key="ListView_Style_01.Static.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ListView_Style_01.Static.BorderBrush" Color="Transparent"/>
         <SolidColorBrush x:Key="ListView_Style_01.MouseOver.Foreground" Color="White"/>
@@ -149,17 +149,17 @@
         <!--// 中间 ListView //-->
 
         <!--// 中间 ListItem //-->
-        <SolidColorBrush x:Key="ListViewItem_Style_01.Static.Foreground" Color="#FF8C8C8C"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.Static.Foreground" Color="#FF787878"/>
         <SolidColorBrush x:Key="ListViewItem_Style_01.Static.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ListViewItem_Style_01.Static.BorderBrush" Color="Transparent"/>
         <!--<SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Foreground" Color="White"/>-->
-        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Background" Color="#19FFFFFF"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.Background" Color="#19323232"/>
         <!--<SolidColorBrush x:Key="ListViewItem_Style_01.MouseOver.BorderBrush" Color="White"/>-->
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Foreground" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Background" Color="#33FFFFFF"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Foreground" Color="#FF3C3C3C"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.Background" Color="#33323232"/>
         <!--<SolidColorBrush x:Key="ListViewItem_Style_01.SelectedActive.BorderBrush" Color="White"/>-->
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Foreground" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Background" Color="#26FFFFFF"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Foreground" Color="#FF5A5A5A"/>
+        <SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.Background" Color="#26323232"/>
         <!--<SolidColorBrush x:Key="ListViewItem_Style_01.SelectedInactive.BorderBrush" Color="LightGray"/>-->
 
         <Style x:Key="ListViewItem_Style_01" TargetType="{x:Type ListViewItem}">
@@ -218,8 +218,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
         <Grid Style="{DynamicResource Grid_Style_01}" Grid.Column="0">
@@ -240,7 +241,21 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" FontSize="18" Foreground="Red" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="1" Width="820">=== ToolBar ===</Label>
+            <Label Grid.Row="0" FontSize="18" Foreground="Red" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="1">=== ToolBar ===</Label>
+            <ListView Grid.Row="1" Style="{StaticResource ListView_Style_01}">
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="ASa Project"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="ASa Project"/>
+                <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="ASa Project"/>
+            </ListView>
+        </Grid>
+
+        <Grid Style="{DynamicResource Grid_Style_02}" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontSize="18" Foreground="Red" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="1">=== ToolBar ===</Label>
             <ListView Grid.Row="1" Style="{StaticResource ListView_Style_01}">
                 <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20100430]アッチむいて恋[Package]"/>
                 <ListViewItem Style="{StaticResource ListViewItem_Style_01}" Content="[ASa Project][20111028]恋愛0キロメートル[Package]"/>
@@ -275,12 +290,25 @@
             </ListView>
         </Grid>
 
-        <Grid Style="{DynamicResource Grid_Style_03}" Grid.Column="2">
-            <Grid.RowDefinitions>
+        <Grid Style="{DynamicResource Grid_Style_03}" Grid.Column="3">
+            <ScrollViewer CanContentScroll="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MaxHeight="200"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Source=".\res\Test_Image_01.png" Stretch="None" />
+                </Grid>
+            </ScrollViewer>
+
+           <!--<Grid.RowDefinitions>
+                <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <ListView Grid.Row="1" BorderThickness="0" Background="Transparent">
+            <Image Grid.Row="0" Source=".\res\Test_Image_01.png"/>
+            <ListView Grid.Row="1" Background="Transparent" BorderThickness="0" Padding="0" Margin="0" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False">
                 <ListView.ItemsSource>
                     <x:Array Type="sys:String">
                         <sys:String>ssss</sys:String>
@@ -295,29 +323,40 @@
                 </ListView.ItemsSource>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="White">
-                            <StackPanel Orientation="Horizontal">
-                                <Label BorderThickness="0" Content="Title" FontWeight="Bold" FontSize="14" Foreground="White"/>
-                                <ListView BorderThickness="0">
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="{x:Type ListViewItem}">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                                        <ContentPresenter/>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                    <Label BorderThickness="0" Content="Content" FontSize="10"/>
-                                    <Label BorderThickness="0" Content="Content" FontSize="10"/>
+                        <Border BorderThickness="1" BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Content="标头：" FontWeight="Bold" FontSize="12" Foreground="Black" FontFamily="微软雅黑"/>
+                                <ListView Grid.Column="1" BorderThickness="0" Padding="0" Margin="0" HorizontalContentAlignment="Stretch">
+                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
+                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
+                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
                                 </ListView>
-                            </StackPanel>
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </Grid>
+
+        <GridSplitter
+            Grid.Column="2"
+            Background="Transparent"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Stretch"
+            ShowsPreview="True"
+            Width="1"/>
+
+        <GridSplitter
+            Grid.Column="3"
+            Background="Transparent"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Stretch"
+            ShowsPreview="True"
+            Width="1"/>
     </Grid>
 </Window>
