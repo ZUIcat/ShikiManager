@@ -228,11 +228,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Style="{StaticResource Button_Style_Icon_01}" Click="Home_Btn_Click">&#xe67f;</Button>
             <Button Grid.Row="1" Style="{StaticResource Button_Style_Icon_01}">&#xe9cb;</Button>
             <Button Grid.Row="2" Style="{StaticResource Button_Style_Icon_01}" Click="OnTestButtonClick">T</Button>
+            <Button Grid.Row="3" Style="{StaticResource Button_Style_Icon_01}">S</Button>
         </Grid>
 
         <Grid Style="{DynamicResource Grid_Style_02}" Grid.Column="1">
@@ -294,53 +296,105 @@
             <ScrollViewer CanContentScroll="False">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" MaxHeight="200"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source=".\res\Test_Image_01.png" Stretch="None" />
+                    <ListView Grid.Row="0"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              Padding="0, 0, 0, 5"
+                              Margin="0"
+                              HorizontalContentAlignment="Stretch"
+                              ScrollViewer.CanContentScroll="False">
+
+                        <ListView.ItemsSource>
+                            <x:Array Type="sys:String">
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                            </x:Array>
+                        </ListView.ItemsSource>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="#33000000" Padding="4" Margin="2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBox Grid.Row="0" BorderThickness="0, 0, 0, 1" FontSize="14" Foreground="#BB000000" FontFamily="微软雅黑" IsReadOnly="True" Text="program01.exe"></TextBox>
+                                            <TextBox Grid.Row="1" BorderThickness="0" FontSize="14" Foreground="#BB000000" FontFamily="微软雅黑" IsReadOnly="True" Text="#H7760"></TextBox>
+                                        </Grid>
+
+                                        <Button Grid.Column="1" BorderThickness="0" FontSize="14" Foreground="#FF000000" FontFamily="微软雅黑" Padding="5" Content="Start"/>
+                                    </Grid> 
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                    <ListView Grid.Row="1"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              BorderBrush="#BB000000"
+                              Padding="0"
+                              Margin="0"
+                              HorizontalContentAlignment="Stretch"
+                              ScrollViewer.CanContentScroll="False">
+                        <ListView.ItemsSource>
+                            <x:Array Type="sys:String">
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                                <sys:String>ssss</sys:String>
+                            </x:Array>
+                        </ListView.ItemsSource>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="0, 0, 0, 1" BorderBrush="#33000000">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Grid.Column="0" BorderThickness="0" FontSize="14" Foreground="#BB000000" FontFamily="微软雅黑" IsReadOnly="True" Text="标头："/>
+                                        <TextBox Grid.Column="1" BorderThickness="0" FontSize="14"  Foreground="Black" FontFamily="微软雅黑" IsReadOnly="True" Text="5678567&#x0A;5678567&#x0A;8fasfdafsf">
+                                            <TextBox.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <!--<Trigger Property="TextElement.AllowDro"-->
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Template>
+                            <ControlTemplate>
+                                <Border BorderThickness="0, 1, 0, 0" BorderBrush="#66000000" Padding="0, 5, 0, 0">
+                                    <ItemsPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </ListView.Template>
+                    </ListView>
                 </Grid>
             </ScrollViewer>
-
-           <!--<Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Image Grid.Row="0" Source=".\res\Test_Image_01.png"/>
-            <ListView Grid.Row="1" Background="Transparent" BorderThickness="0" Padding="0" Margin="0" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False">
-                <ListView.ItemsSource>
-                    <x:Array Type="sys:String">
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                        <sys:String>ssss</sys:String>
-                    </x:Array>
-                </ListView.ItemsSource>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="Black">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Column="0" Content="标头：" FontWeight="Bold" FontSize="12" Foreground="Black" FontFamily="微软雅黑"/>
-                                <ListView Grid.Column="1" BorderThickness="0" Padding="0" Margin="0" HorizontalContentAlignment="Stretch">
-                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
-                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
-                                    <Label BorderThickness="0" Content="Content" FontSize="12"  Foreground="Black" FontFamily="微软雅黑"/>
-                                </ListView>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
         </Grid>
 
         <GridSplitter
