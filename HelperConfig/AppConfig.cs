@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HelperConfig {
+﻿namespace HelperConfig {
     public class AppConfig {
         public string ScreenshotPath { get; set; }
 
@@ -23,4 +16,4 @@ namespace HelperConfig {
             TextractorConfig = new TextractorConfig();
         }
     }
-} 
+}

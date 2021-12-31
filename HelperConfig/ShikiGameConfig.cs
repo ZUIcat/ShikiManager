@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HelperConfig {
+﻿namespace HelperConfig {
     public class ShikiGameConfig {
         public IList<string> Title { get; set; } // 恋愛×ロワイアル
         public IList<string> Version { get; set; } // v1.02; rev 1623; adult v1.0

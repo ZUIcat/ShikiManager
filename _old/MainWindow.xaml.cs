@@ -12,11 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HelperConfig;
 
 namespace ShikiManager {
     public partial class MainWindow : Window {
+        private ToolWindow toolWindow;
+
         public MainWindow() {
             InitializeComponent();
+
+            Init();
+        }
+
+        private void Init() {
+            ConfigHelper.Instance.ReadAppConfig();
+        }
+
+        private void Home_Btn_Click(object sender, RoutedEventArgs e) {
+            ConfigHelper.Instance.WriteAppConfig();
+        }
+
+        private void OnTestButtonClick(object sender, RoutedEventArgs e) {
+            if (toolWindow == null) { toolWindow = new ToolWindow(); }
+            toolWindow.Show();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace HelperConfig {
             appBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             #if DEBUG
             appBasePath = Path.Combine(appBasePath, "../../../../");
-            System.Windows.MessageBox.Show("Debug Mode.");
+            // System.Windows.MessageBox.Show("Debug Mode.");
             #endif
             appDataPath = Path.Combine(appBasePath, dataPath);
             appConfigPath = Path.Combine(appDataPath, appConfigFileName);

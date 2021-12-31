@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HelperConfig {
+﻿namespace HelperConfig {
     public class MeCabConfig {
         public string DirPath { get; set; }
         public MeCabDicType DicType { get; set; }
