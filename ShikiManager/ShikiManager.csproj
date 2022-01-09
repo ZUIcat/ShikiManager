@@ -24,6 +24,10 @@
   <ItemGroup>
     <ProjectReference Include="..\HelperConfig\HelperConfig.csproj" />
     <ProjectReference Include="..\HelperExternDll\HelperExternDll.csproj" />
+    <ProjectReference Include="..\HelperLocaleEmulator\HelperLocaleEmulator.csproj" />
+    <ProjectReference Include="..\HelperMeCab\HelperMeCab.csproj" />
+    <ProjectReference Include="..\HelperNtleas\HelperNtleas.csproj" />
+    <ProjectReference Include="..\HelperTextractor\HelperTextractor.csproj" />
   </ItemGroup>
 
 </Project>

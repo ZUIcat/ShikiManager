@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShikiManager", "ShikiManager\ShikiManager.csproj", "{04085CB9-C642-47EA-BEE4-726ED7665E27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShikiManager", "ShikiManager\ShikiManager.csproj", "{04085CB9-C642-47EA-BEE4-726ED7665E27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperConfig", "HelperConfig\HelperConfig.csproj", "{A209C26A-9931-407C-99F3-275C70932D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperConfig", "HelperConfig\HelperConfig.csproj", "{A209C26A-9931-407C-99F3-275C70932D6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperExternDll", "HelperExternDll\HelperExternDll.csproj", "{E9D999A9-0C68-44E1-BD3D-AA22BADB17DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperExternDll", "HelperExternDll\HelperExternDll.csproj", "{E9D999A9-0C68-44E1-BD3D-AA22BADB17DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperLocaleEmulator", "HelperLocaleEmulator\HelperLocaleEmulator.csproj", "{826906B5-D3DA-4F58-AAF6-F2FFC7C2680B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperLocaleEmulator", "HelperLocaleEmulator\HelperLocaleEmulator.csproj", "{826906B5-D3DA-4F58-AAF6-F2FFC7C2680B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperMeCab", "HelperMeCab\HelperMeCab.csproj", "{58AD3C0B-CD88-4AC7-B7B0-CBB0FAB390AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperMeCab", "HelperMeCab\HelperMeCab.csproj", "{58AD3C0B-CD88-4AC7-B7B0-CBB0FAB390AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperNtleas", "HelperNtleas\HelperNtleas.csproj", "{5252B03D-B045-43F3-B010-49DEE0E69340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperNtleas", "HelperNtleas\HelperNtleas.csproj", "{5252B03D-B045-43F3-B010-49DEE0E69340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

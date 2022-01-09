@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -10,35 +11,32 @@ namespace HelperConfig {
 
         public static ConfigHelper Instance {
             get {
-                if (instance == null) { instance = new ConfigHelper(); }
+                if (instance == null) {
+                    instance = new ConfigHelper();
+                }
                 return instance;
             }
         }
 
-        private const string dataPath = @".\Data";
-        private const string appConfigFileName = "AppConfig.json";
-        private const string gameConfigFileName = "ShikiGameConfig.json";
+        public const string dataPath = @".\Data";
+        public const string appConfigFileName = "AppConfig.json";
+        public const string gameConfigFileName = "ShikiGameConfig.json";
 
-        private readonly string appBasePath;
-        private readonly string appDataPath;
-        private readonly string appConfigPath;
         private readonly JsonSerializerOptions jsonSerializerOptions;
 
-        public string AppBasePath { get => appBasePath; }
-        public string AppDataPath { get => appDataPath; }
-        public string AppConfigPath { get => appConfigPath; }
+        public string AppBasePath { get; private set; }
+        public string AppDataPath { get; private set; }
+        public string AppConfigPath { get; private set; }
 
-        private AppConfig appConfig;
-        public AppConfig AppConfig { get => appConfig; }
+        public AppConfig AppConfig { get; private set; }
 
         private ConfigHelper() {
-            appBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            #if DEBUG
-            appBasePath = Path.Combine(appBasePath, "../../../../");
-            // System.Windows.MessageBox.Show("Debug Mode.");
-            #endif
-            appDataPath = Path.Combine(appBasePath, dataPath);
-            appConfigPath = Path.Combine(appDataPath, appConfigFileName);
+            AppBasePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+#if DEBUG
+            AppBasePath = Path.Combine(AppBasePath, "../../../../");
+#endif
+            AppDataPath = Path.Combine(AppBasePath, dataPath);
+            AppConfigPath = Path.Combine(AppDataPath, appConfigFileName);
             jsonSerializerOptions = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true
@@ -46,19 +44,19 @@ namespace HelperConfig {
         }
 
         public AppConfig ReadAppConfig() {
-            if (File.Exists(appConfigPath)) {
-                string jsonString = File.ReadAllText(appConfigPath);
-                appConfig = JsonSerializer.Deserialize<AppConfig>(jsonString, jsonSerializerOptions);
+            if (File.Exists(AppConfigPath)) {
+                string jsonString = File.ReadAllText(AppConfigPath);
+                AppConfig = JsonSerializer.Deserialize<AppConfig>(jsonString, jsonSerializerOptions);
             } else {
-                appConfig = new AppConfig();
+                AppConfig = new AppConfig();
             }
-            return appConfig;
+            return AppConfig;
         }
 
         public void WriteAppConfig() {
-            Directory.CreateDirectory(appDataPath);
-            string jsonString = JsonSerializer.Serialize<AppConfig>(appConfig, jsonSerializerOptions);
-            File.WriteAllText(appConfigPath, jsonString);
+            Directory.CreateDirectory(AppDataPath);
+            string jsonString = JsonSerializer.Serialize(AppConfig, jsonSerializerOptions);
+            File.WriteAllText(AppConfigPath, jsonString);
         }
 
         public ShikiGameConfig ReadGameConfig(string gameDirPath) {

@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Click="TestButton01_Click" Grid.Column="0" Grid.Row="0">TestButton01</Button>
+        <Button Click="TestButton02_Click" Grid.Column="0" Grid.Row="1">TestButton02</Button>
+        <Button Click="TestButton03_Click" Grid.Column="0" Grid.Row="2">TestButton03</Button>
     </Grid>
 </Window>
