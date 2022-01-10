@@ -58,7 +58,8 @@ namespace HelperTextractor {
         /// 初始化 TextractorHelper
         /// 在此创建 Textractor 进程
         /// </summary>
-        /// <param name="x86">是否是 x86 程序</param>
+        /// <param name="textractorDir">textractor 所在的目录</param>
+        /// <param name="x86">是否使用 x86 版本，否则使用 x64 版本</param>
         /// <returns>是否初始化成功</returns>
         public bool Init(string textractorDir, bool x86 = true) {
             if (NowState != STATE.INIT) {
@@ -196,7 +197,7 @@ namespace HelperTextractor {
         /// <summary>
         /// 关闭 Textractor 进程，关闭前 Detach 所有 Hook
         /// </summary>
-        public async void Close() {
+        public async void Destroy() {
             if (TextractorProcess != null && TextractorProcess.HasExited == false) {
                 HashSet<int> ProcessIDs = new HashSet<int>();
                 foreach (var item in GameHookDic.Values) { // TODO LINQ

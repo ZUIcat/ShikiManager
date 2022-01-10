@@ -42,7 +42,7 @@ namespace ShikiManager {
         }
 
         private void TestButton03_Click(object sender, RoutedEventArgs e) {
-            textractorHelper?.Close();
+            textractorHelper?.Destroy();
             ConfigHelper.Instance.WriteAppConfig();
         }
     }
