@@ -14,14 +14,14 @@ namespace HelperTextractor {
         /// <summary>
         /// 头部信息内容
         /// </summary>
-        public TextHookHeadData HeadData { get; set;}
+        public TextHookHeadData HeadData { get; private set; }
 
         /// <summary>
         /// 输出文本内容
         /// </summary>
-        public string TextData { set; get; }
+        public string TextData { get; private set; }
 
-        public TextHookData(string? rawTextData) {
+        public TextHookData(string rawTextData) {
             // [3:1C1C:417E20:419E80:18:KiriKiriZ:HW-8*14:-8*0@167E20:ああああ.exe] ああああ
             // [4:1C1C:417E20:419EBA:18:KiriKiriZ:HW-8*14:-8*0@167E20:ああああ.exe] ああああ
             // [2:1C1C:77936D10:4731CD:0:GetTextExtentPoint32W:HQ8@0:gdi32.dll:GetTextExtentPoint32W] ああああ
@@ -37,8 +37,8 @@ namespace HelperTextractor {
             // 5：Textrator 自己的 handler name：为 Console 时代表 Textrator 本体控制台输出，为 Clipboard 时代表从剪贴板获取的文本
             // 6&7&8：特殊码，详细定义见 Textractor
 
-            if (string.IsNullOrEmpty(rawTextData)) {
-                throw new Exception("The rawTextData is null or empty!");
+            if (string.IsNullOrWhiteSpace(rawTextData)) {
+                throw new Exception("The rawTextData is null or white space!");
             }
 
             var match = patternRegex.Match(rawTextData);
@@ -61,7 +61,7 @@ namespace HelperTextractor {
         }
     }
 
-    public class TextHookHeadData { // TODO to struct
+    public struct TextHookHeadData {
         /// <summary>
         /// 进程 ID
         /// </summary>

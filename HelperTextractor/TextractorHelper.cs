@@ -14,20 +14,10 @@ namespace HelperTextractor {
         public const int OUTPUT_HISTORY_MAX_LEN = 1000;
 
         /// <summary>
-        /// TextractorHelper 整体状态机的全部状态
-        /// </summary>
-        public enum STATE {
-            INIT,
-            TRIM,
-            RUN,
-            DESTROY
-        }
-
-        /// <summary>
         /// Textractor 的进程
         /// 一个 TextractorHelper 只允许有一个 Textractor 进程
         /// </summary>
-        private Process TextractorProcess { get; set; }
+        private Process? TextractorProcess { get; set; }
 
         /// <summary>
         /// Textractor 的历史文本队列
@@ -41,17 +31,9 @@ namespace HelperTextractor {
         /// </summary>
         public Dictionary<string, TextHookHeadData> GameHookDic { get; private set; }
 
-        /// <summary>
-        /// TextractorHelper 现在所处的状态
-        /// </summary>
-        public STATE NowState { get; private set; }
-
         public TextractorHelper() {
-            TextractorOutPutQueue = new Queue<TextHookData>();
+            TextractorOutPutQueue = new Queue<TextHookData>(OUTPUT_HISTORY_MAX_LEN);
             GameHookDic = new Dictionary<string, TextHookHeadData>();
-
-            NowState = STATE.INIT;
-            Trace.TraceInformation("TextractorHelper to state INIT.");
         }
 
         /// <summary>
@@ -61,11 +43,12 @@ namespace HelperTextractor {
         /// <param name="textractorDir">textractor 所在的目录</param>
         /// <param name="x86">是否使用 x86 版本，否则使用 x64 版本</param>
         /// <returns>是否初始化成功</returns>
-        public bool Init(string textractorDir, bool x86 = true) {
-            if (NowState != STATE.INIT) {
-                Trace.TraceError("TextractorHelper has been initialized.");
+        public bool Create(string textractorDir, bool x86 = true) {
+            if (TextractorProcess != null) {
+                Trace.TraceError("TextractorHelper has been created.");
                 return false;
             }
+
             string textractorBinPath = Path.Combine(textractorDir, x86 ? "x86" : "x64");
             string appPath = Environment.CurrentDirectory;
             try {
@@ -87,12 +70,12 @@ namespace HelperTextractor {
                 TextractorProcess.Start();
                 TextractorProcess.BeginOutputReadLine();
                 TextractorProcess.BeginErrorReadLine();
-
-                NowState = STATE.TRIM;
-                Trace.TraceInformation("TextractorHelper to state TRIM.");
                 return true;
             } catch (Exception e) {
                 Trace.TraceError(e.Message);
+                TextractorProcess?.Kill();
+                TextractorProcess?.Dispose();
+                TextractorProcess = null;
                 return false;
             } finally {
                 Environment.CurrentDirectory = appPath;
@@ -104,7 +87,7 @@ namespace HelperTextractor {
 #if DEBUG
             Trace.TraceInformation("OutputHandler: " + e.Data);
 #endif
-            if (string.IsNullOrEmpty(e.Data) || !e.Data.StartsWith("[")) {
+            if (e.Data == null || !e.Data.StartsWith("[")) {
                 return;
             }
 
@@ -118,22 +101,13 @@ namespace HelperTextractor {
             }
 
             // 加入到历史信息队列
+            if (TextractorOutPutQueue.Count >= OUTPUT_HISTORY_MAX_LEN) {
+                TextractorOutPutQueue.TryDequeue(out _);
+            }
             TextractorOutPutQueue.Enqueue(textHookData);
 
-            switch (NowState) {
-                case STATE.INIT:
-                    // 不可能到这里
-                    break;
-                case STATE.TRIM:
-                    // 加入到 Hook 信息头字典
-                    GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData);
-                    break;
-                case STATE.RUN:
-                    break;
-                case STATE.DESTROY:
-                    // 不可能到这里
-                    break;
-            }
+            // 加入到 Hook 信息头字典
+            GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO
         }
 
         private void ErrorHandler(object sender, DataReceivedEventArgs e) {
@@ -150,8 +124,12 @@ namespace HelperTextractor {
         public async Task AttachProcess(int pid) {
             var command = $"attach -P{pid}";
             Trace.TraceInformation($"AttachProcess async: {command}");
-            await TextractorProcess.StandardInput.WriteLineAsync(command);
-            await TextractorProcess.StandardInput.FlushAsync();
+            if (TextractorProcess != null) {
+                await TextractorProcess.StandardInput.WriteLineAsync(command);
+                await TextractorProcess.StandardInput.FlushAsync();
+            } else {
+                Trace.TraceError("TextractorProcess is null!");
+            }
         }
 
         /// <summary>
@@ -162,8 +140,12 @@ namespace HelperTextractor {
         public async Task DetachProcess(int pid) {
             var command = $"detach -P{pid}";
             Trace.TraceInformation($"DetachProcess async: {command}");
-            await TextractorProcess.StandardInput.WriteLineAsync(command);
-            await TextractorProcess.StandardInput.FlushAsync();
+            if (TextractorProcess != null) {
+                await TextractorProcess.StandardInput.WriteLineAsync(command);
+                await TextractorProcess.StandardInput.FlushAsync();
+            } else {
+                Trace.TraceError("TextractorProcess is null!");
+            }
         }
 
         /// <summary>
@@ -175,8 +157,12 @@ namespace HelperTextractor {
         public async Task AttachProcessByHookCode(int pid, string hookCode) {
             var command = $"{hookCode} -P{pid}";
             Trace.TraceInformation($"AttachProcessByHookCode async: {command}");
-            await TextractorProcess.StandardInput.WriteLineAsync(command);
-            await TextractorProcess.StandardInput.FlushAsync();
+            if (TextractorProcess != null) {
+                await TextractorProcess.StandardInput.WriteLineAsync(command);
+                await TextractorProcess.StandardInput.FlushAsync();
+            } else {
+                Trace.TraceError("TextractorProcess is null!");
+            }
         }
 
         /// <summary>
@@ -190,8 +176,12 @@ namespace HelperTextractor {
             // 但是后续给定的模块并不存在，于是 Textractor 再卸载掉这个用户自定义钩子，达到卸载一个指定 Hook 办法
             var command = $"HW0@{hookAddress}:module_which_never_exists -P{pid}";
             Trace.TraceInformation($"DetachProcessByHookAddress async: {command}");
-            await TextractorProcess.StandardInput.WriteLineAsync(command);
-            await TextractorProcess.StandardInput.FlushAsync();
+            if (TextractorProcess != null) {
+                await TextractorProcess.StandardInput.WriteLineAsync(command);
+                await TextractorProcess.StandardInput.FlushAsync();
+            } else {
+                Trace.TraceError("TextractorProcess is null!");
+            }
         }
 
         /// <summary>
@@ -211,7 +201,10 @@ namespace HelperTextractor {
                 TextractorProcess.Kill();
             }
             TextractorProcess?.Dispose();
-            TextractorProcess = null; // TODO
+            TextractorProcess = null;
+
+            TextractorOutPutQueue.Clear();
+            GameHookDic.Clear();
         }
     }
 }

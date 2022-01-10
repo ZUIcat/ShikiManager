@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperNtleas", "HelperNtlea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperTextractor", "HelperTextractor\HelperTextractor.csproj", "{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShikiManagerTests", "ShikiManagerTests\ShikiManagerTests.csproj", "{AE311F6C-14DA-44FF-A591-638D71140050}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D8DD38-9774-446F-ACDF-DD03AB4A2B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE311F6C-14DA-44FF-A591-638D71140050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE311F6C-14DA-44FF-A591-638D71140050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE311F6C-14DA-44FF-A591-638D71140050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE311F6C-14DA-44FF-A591-638D71140050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

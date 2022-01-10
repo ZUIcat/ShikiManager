@@ -33,7 +33,7 @@ namespace ShikiManager {
 
         private void TestButton01_Click(object sender, RoutedEventArgs e) {
             textractorHelper = new TextractorHelper();
-            textractorHelper.Init(ConfigHelper.Instance.AppConfig.TextractorConfig.DirPath);
+            textractorHelper.Create(ConfigHelper.Instance.AppConfig.TextractorConfig.DirPath);
             //textractorHelper.Init(@"C:\_MyWorkSpace\WorkSpaceTemp\HookTranslator\Textractor\release_v5.1.0");
         }
 

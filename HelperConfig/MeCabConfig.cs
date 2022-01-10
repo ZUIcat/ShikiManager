@@ -11,6 +11,6 @@
 
     public enum MeCabDicType {
         IPADIC,
-        UNIDIC
+        UNIDIC22
     }
 }
