@@ -12,6 +12,11 @@ namespace HelperTextractor {
         private static readonly Regex patternRegex = new(@"\[\w+?:(\w+?):((\w+?):(\w+?):(\w+?)):(\w+?):(.+)\]\s(.*)", RegexOptions.Compiled);
 
         /// <summary>
+        /// 输出文本内容过滤器
+        /// </summary>
+        public static Func<string, string>? TextDataFilter { get; set; }
+
+        /// <summary>
         /// 头部信息内容
         /// </summary>
         public TextHookHeadData HeadData { get; private set; }
@@ -57,7 +62,7 @@ namespace HelperTextractor {
                 matchGroups[7].Value,
                 matchGroups[2].Value
             );
-            TextData = matchGroups[8].Value;
+            TextData = TextDataFilter == null? matchGroups[8].Value : TextDataFilter(matchGroups[8].Value);
         }
     }
 

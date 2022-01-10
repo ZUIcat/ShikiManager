@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperExternDll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,41 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace ShikiManager {
-    /// <summary>
-    /// TextWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class TextWindow : Window {
         public TextWindow() {
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            // 设置窗口不获取焦点
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            Winuser.SetWindowNoActivate(wndHelper.Handle);
+        }
 
+        private void Window_Closed(object sender, EventArgs e) {
+
+        }
+
+        private void MoveButton_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
+            this.DragMove();
+        }
+
+        private void MoveButton_PreviewTouchDown(object sender, TouchEventArgs e) {
+            this.DragMove();
+        }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e) {
+            this.Hide();
         }
     }
 }

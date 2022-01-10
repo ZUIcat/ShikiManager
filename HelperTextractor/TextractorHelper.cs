@@ -106,6 +106,10 @@ namespace HelperTextractor {
             }
             TextractorOutPutQueue.Enqueue(textHookData);
 
+#if DEBUG
+            Trace.TraceInformation("OutputHandler: " + textHookData.TextData);
+#endif
+
             // 加入到 Hook 信息头字典
             GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO
         }

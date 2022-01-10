@@ -8,14 +8,50 @@
         Title="TextWindow"
         Height="200"
         Width="800"
-        SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize"
+        MinHeight="50"
+        MinWidth="400"
+        ResizeMode="CanResize"
         WindowStyle="None"
         Topmost="True"
         WindowStartupLocation="Manual"
         ShowInTaskbar="False"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <!--AllowsTransparency="True"-->
+    <!--SizeToContent="WidthAndHeight"-->
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
     <Grid>
-        <TextBlock FontFamily="微软雅黑" FontSize="16">Hello</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft" >
+            <Button Name="CloseButton"
+                    Width="50"
+                    Click="CloseButton_Click"
+                    Content="Close"/>
+
+            <Button Name="MoveButton"
+                    Width="50"
+                    PreviewMouseDown="MoveButton_PreviewMouseDown"
+                    PreviewTouchDown="MoveButton_PreviewTouchDown"
+                    Content="Move"/>
+
+            <Button Name="SettingButton"
+                    Width="50"
+                    Click="SettingButton_Click"
+                    Content="Setting"/>
+        </StackPanel> 
+
+        <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="微软雅黑" FontSize="16">Hello</TextBlock>
     </Grid>
 </Window>
