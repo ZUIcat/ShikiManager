@@ -40,7 +40,7 @@ namespace ShikiManager {
         }
 
         private async void TestButton02_Click(object sender, RoutedEventArgs e) {
-            await textractorHelper.AttachProcess(19108);
+            await textractorHelper.AttachProcess(4192);
         }
 
         private void TestButton03_Click(object sender, RoutedEventArgs e) {
@@ -51,6 +51,7 @@ namespace ShikiManager {
         private void TestButton04_Click(object sender, RoutedEventArgs e) {
             textWindow ??= new TextWindow();
             textWindow.Show();
+            textractorHelper.TextOutputAction += textWindow.ChangeText;
         }
 
         private void TestButton05_Click(object sender, RoutedEventArgs e) {

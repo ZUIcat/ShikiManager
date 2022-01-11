@@ -20,6 +20,11 @@ namespace HelperTextractor {
         private Process? TextractorProcess { get; set; }
 
         /// <summary>
+        /// TextractorHelper 输出剧情文本时会调用此事件
+        /// </summary>
+        public Action<string>? TextOutputAction { get; set; }
+
+        /// <summary>
         /// Textractor 的历史文本队列
         /// </summary>
         public Queue<TextHookData> TextractorOutPutQueue { get; private set; }
@@ -100,18 +105,21 @@ namespace HelperTextractor {
                 return;
             }
 
+            // 加入到 Hook 信息头字典
+            GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO
+
             // 加入到历史信息队列
             if (TextractorOutPutQueue.Count >= OUTPUT_HISTORY_MAX_LEN) {
                 TextractorOutPutQueue.TryDequeue(out _);
             }
             TextractorOutPutQueue.Enqueue(textHookData);
 
+            // 调用外部事件
+            TextOutputAction?.Invoke(textHookData.TextData);
+
 #if DEBUG
             Trace.TraceInformation("OutputHandler: " + textHookData.TextData);
 #endif
-
-            // 加入到 Hook 信息头字典
-            GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO
         }
 
         private void ErrorHandler(object sender, DataReceivedEventArgs e) {

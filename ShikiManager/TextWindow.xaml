@@ -15,43 +15,63 @@
         Topmost="True"
         WindowStartupLocation="Manual"
         ShowInTaskbar="False"
+        AllowsTransparency="True"
         Loaded="Window_Loaded"
-        Closed="Window_Closed">
-    <!--AllowsTransparency="True"-->
-    <!--SizeToContent="WidthAndHeight"-->
+        Closed="Window_Closed"
+        StateChanged="Window_StateChanged">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 
+    <Window.Background>
+        <SolidColorBrush Opacity="0.8" Color="White"/>
+    </Window.Background>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft" >
-            <Button Name="CloseButton"
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft" >
+                <Button x:Name="CloseButton"
                     Width="50"
                     Click="CloseButton_Click"
                     Content="Close"/>
 
-            <Button Name="MoveButton"
+                <Button x:Name="MoveButton"
                     Width="50"
                     PreviewMouseDown="MoveButton_PreviewMouseDown"
                     PreviewTouchDown="MoveButton_PreviewTouchDown"
                     Content="Move"/>
 
-            <Button Name="SettingButton"
+                <Button x:Name="SettingButton"
                     Width="50"
                     Click="SettingButton_Click"
                     Content="Setting"/>
-        </StackPanel> 
+            </StackPanel>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="微软雅黑" FontSize="16">Hello</TextBlock>
+            <Border Margin="10 10 10 10"
+                Grid.Row="1"
+                Grid.Column="0">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                    <WrapPanel x:Name="TextWarpPanel">
+                        <Border Margin="1 1 1 1">
+                            <TextBlock>
+                                [Hello]<LineBreak/>
+                                1
+                            </TextBlock>
+                        </Border>
+                    </WrapPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

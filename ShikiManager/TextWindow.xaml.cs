@@ -1,6 +1,7 @@
 ﻿using HelperExternDll;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,20 +31,43 @@ namespace ShikiManager {
 
         }
 
+        private void Window_StateChanged(object sender, EventArgs e) {
+            if (WindowState != WindowState.Normal) {
+                WindowState = WindowState.Normal;
+            }
+        }
+
         private void MoveButton_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
-            this.DragMove();
+            DragMove();
         }
 
         private void MoveButton_PreviewTouchDown(object sender, TouchEventArgs e) {
-            this.DragMove();
+            DragMove();
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e) {
-
+            ChangeText("szdgfsg");
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
-            this.Hide();
+            Hide();
+            //Close();
+        }
+
+        public void ChangeText(string text) {
+            Trace.TraceInformation("dddddddddddddddddddddd");
+            Application.Current.Dispatcher.BeginInvoke((Action<string>)((text) => ChangeTextImpl(text)), text);
+        }
+
+        public void ChangeTextImpl(string text) {
+            Trace.TraceInformation("ffffffffffffffffffffffffff"); // TODO 为啥关闭了之后还会调用？？
+            TextWarpPanel.Children.Clear();
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = $"[{text}]\n{text}";
+            Border border = new Border();
+            border.Margin = new Thickness(1, 1, 1, 1);
+            border.Child = textBlock;
+            TextWarpPanel.Children.Add(border);
         }
     }
 }
