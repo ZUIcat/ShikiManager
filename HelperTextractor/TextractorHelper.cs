@@ -22,7 +22,7 @@ namespace HelperTextractor {
         /// <summary>
         /// TextractorHelper 输出剧情文本时会调用此事件
         /// </summary>
-        public Action<string>? TextOutputAction { get; set; }
+        public Action<TextHookData>? TextOutputAction { get; set; }
 
         /// <summary>
         /// Textractor 的历史文本队列
@@ -36,9 +36,15 @@ namespace HelperTextractor {
         /// </summary>
         public Dictionary<string, TextHookHeadData> GameHookDic { get; private set; }
 
+        /// <summary>
+        /// TextractorHelper 是否暂停处理文本
+        /// </summary>
+        public bool IsPause { get; set; }
+
         public TextractorHelper() {
             TextractorOutPutQueue = new Queue<TextHookData>(OUTPUT_HISTORY_MAX_LEN);
             GameHookDic = new Dictionary<string, TextHookHeadData>();
+            IsPause = false;
         }
 
         /// <summary>
@@ -92,7 +98,7 @@ namespace HelperTextractor {
 #if DEBUG
             Trace.TraceInformation("OutputHandler: " + e.Data);
 #endif
-            if (e.Data == null || !e.Data.StartsWith("[")) {
+            if (IsPause || e.Data == null || !e.Data.StartsWith("[")) {
                 return;
             }
 
@@ -106,7 +112,7 @@ namespace HelperTextractor {
             }
 
             // 加入到 Hook 信息头字典
-            GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO
+            GameHookDic.TryAdd(textHookData.HeadData.CustomIdentification, textHookData.HeadData); // TODO state
 
             // 加入到历史信息队列
             if (TextractorOutPutQueue.Count >= OUTPUT_HISTORY_MAX_LEN) {
@@ -115,7 +121,7 @@ namespace HelperTextractor {
             TextractorOutPutQueue.Enqueue(textHookData);
 
             // 调用外部事件
-            TextOutputAction?.Invoke(textHookData.TextData);
+            TextOutputAction?.Invoke(textHookData);
 
 #if DEBUG
             Trace.TraceInformation("OutputHandler: " + textHookData.TextData);
@@ -196,6 +202,11 @@ namespace HelperTextractor {
             }
         }
 
+        public async Task DetachProcessByTextHookData(TextHookHeadData textHookHeadData) {
+            int processID = textHookHeadData.ProcessID;
+            string hookAddress = textHookHeadData.Address;
+        }
+
         /// <summary>
         /// 关闭 Textractor 进程，关闭前 Detach 所有 Hook
         /// </summary>
@@ -203,7 +214,7 @@ namespace HelperTextractor {
             if (TextractorProcess != null && TextractorProcess.HasExited == false) {
                 HashSet<int> ProcessIDs = new HashSet<int>();
                 foreach (var item in GameHookDic.Values) { // TODO LINQ
-                    if(item.ProcessID > 0) {
+                    if (item.ProcessID > 0) {
                         ProcessIDs.Add(item.ProcessID);
                     }
                 }

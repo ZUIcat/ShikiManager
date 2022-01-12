@@ -30,7 +30,7 @@ namespace ShikiManager {
             Trace.Listeners.Add(defaultListener);
 
             ConfigHelper.Instance.ReadAppConfig();
-            TextHookData.TextDataFilter = TextDataRegxHandler.Remove2SameChar;
+            TextHookData.TextDataFilterFunc = TextDataFilter.Remove2SameChar;
         }
 
         private void TestButton01_Click(object sender, RoutedEventArgs e) {
@@ -51,7 +51,9 @@ namespace ShikiManager {
         private void TestButton04_Click(object sender, RoutedEventArgs e) {
             textWindow ??= new TextWindow();
             textWindow.Show();
-            textractorHelper.TextOutputAction += textWindow.ChangeText;
+            if (textractorHelper != null) {
+                textractorHelper.TextOutputAction += textWindow.ChangeText;
+            }
         }
 
         private void TestButton05_Click(object sender, RoutedEventArgs e) {

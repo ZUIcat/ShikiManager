@@ -14,7 +14,7 @@ namespace HelperTextractor {
         /// <summary>
         /// 输出文本内容过滤器
         /// </summary>
-        public static Func<string, string>? TextDataFilter { get; set; }
+        public static Func<string, string>? TextDataFilterFunc { get; set; }
 
         /// <summary>
         /// 头部信息内容
@@ -34,7 +34,7 @@ namespace HelperTextractor {
             // [7:1C1C:77934190:47358A:0:GetGlyphOutlineW:HW8@0:gdi32.dll:GetGlyphOutlineW] ああああ
             // [5:1C1C:77934190:473368:0:GetGlyphOutlineW:HW8@0:gdi32.dll:GetGlyphOutlineW] ああああ
             // 方括号内以冒号分隔，长度 >= 7，分别为：
-            // 0：Textrator 自己的 handle 序号 ID
+            // 0：Textrator 自己的 handler 序号 ID
             // 1：进程 ID（16进制）
             // 2：Hook 入口地址
             // 3：The context of the hook: by default the first value on stack, usually the return address
@@ -62,7 +62,7 @@ namespace HelperTextractor {
                 matchGroups[7].Value,
                 matchGroups[2].Value
             );
-            TextData = TextDataFilter == null? matchGroups[8].Value : TextDataFilter(matchGroups[8].Value);
+            TextData = TextDataFilterFunc == null ? matchGroups[8].Value : TextDataFilterFunc(matchGroups[8].Value);
         }
     }
 

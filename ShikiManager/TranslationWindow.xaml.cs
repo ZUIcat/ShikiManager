@@ -1,4 +1,5 @@
 ﻿using HelperExternDll;
+using HelperTextractor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -46,7 +47,7 @@ namespace ShikiManager {
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e) {
-            ChangeText("szdgfsg");
+            ChangeTextImpl("szdgfsg");
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
@@ -54,9 +55,9 @@ namespace ShikiManager {
             //Close();
         }
 
-        public void ChangeText(string text) {
+        public void ChangeText(TextHookData textHookData) {
             Trace.TraceInformation("dddddddddddddddddddddd");
-            Application.Current.Dispatcher.BeginInvoke((Action<string>)((text) => ChangeTextImpl(text)), text);
+            Application.Current.Dispatcher.BeginInvoke((Action<string>)((text) => ChangeTextImpl(text)), textHookData.TextData);
         }
 
         public void ChangeTextImpl(string text) {

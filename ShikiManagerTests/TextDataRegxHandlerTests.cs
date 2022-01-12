@@ -14,7 +14,7 @@ namespace HelperTextractor.Tests {
             var ss1 = "[[112233]]";
             var ss2 = "[123]";
 
-            Assert.AreEqual(TextDataRegxHandler.Remove2SameChar(ss1), ss2);
+            Assert.AreEqual(TextDataFilter.Remove2SameChar(ss1), ss2);
         }
 
         [TestMethod()]
@@ -22,7 +22,7 @@ namespace HelperTextractor.Tests {
             var ss1 = "[[[111222333]]]";
             var ss2 = "[123]";
 
-            Assert.AreEqual(TextDataRegxHandler.Remove3SameChar(ss1), ss2);
+            Assert.AreEqual(TextDataFilter.Remove3SameChar(ss1), ss2);
         }
     }
 }
