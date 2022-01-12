@@ -66,7 +66,7 @@ namespace HelperTextractor {
         }
     }
 
-    public struct TextHookHeadData {
+    public struct TextHookHeadData : IEquatable<TextHookHeadData> {
         /// <summary>
         /// 进程 ID
         /// </summary>
@@ -110,6 +110,26 @@ namespace HelperTextractor {
             HandlerName = handlerName;
             HookCode = hookCode;
             CustomIdentification = customIdentification;
+        }
+
+        public override bool Equals(object? obj) {
+            return obj is TextHookHeadData data && Equals(data);
+        }
+
+        public bool Equals(TextHookHeadData other) {
+            return CustomIdentification == other.CustomIdentification;
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(CustomIdentification);
+        }
+
+        public static bool operator ==(TextHookHeadData left, TextHookHeadData right) {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(TextHookHeadData left, TextHookHeadData right) {
+            return !(left == right);
         }
     }
 }

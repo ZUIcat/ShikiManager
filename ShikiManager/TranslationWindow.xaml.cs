@@ -26,10 +26,12 @@ namespace ShikiManager {
             // 设置窗口不获取焦点
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             Winuser.SetWindowNoActivate(wndHelper.Handle);
+
+            TextractorHelper.Instance.TextOutputEvent += ChangeText;
         }
 
         private void Window_Closed(object sender, EventArgs e) {
-
+            TextractorHelper.Instance.TextOutputEvent -= ChangeText;
         }
 
         private void Window_StateChanged(object sender, EventArgs e) {
@@ -52,11 +54,9 @@ namespace ShikiManager {
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
             Hide();
-            //Close();
         }
 
         public void ChangeText(TextHookData textHookData) {
-            Trace.TraceInformation("dddddddddddddddddddddd");
             Application.Current.Dispatcher.BeginInvoke((Action<string>)((text) => ChangeTextImpl(text)), textHookData.TextData);
         }
 

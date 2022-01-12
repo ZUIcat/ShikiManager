@@ -18,7 +18,6 @@ using System.Windows.Shapes;
 
 namespace ShikiManager {
     public partial class MainWindow : Window {
-        TextractorHelper textractorHelper;
         TextWindow textWindow = null!;
 
         public MainWindow() {
@@ -34,26 +33,22 @@ namespace ShikiManager {
         }
 
         private void TestButton01_Click(object sender, RoutedEventArgs e) {
-            textractorHelper = new TextractorHelper();
-            textractorHelper.Create(ConfigHelper.Instance.AppConfig.TextractorConfig.DirPath);
+            TextractorHelper.Instance.Create(ConfigHelper.Instance.AppConfig.TextractorConfig.DirPath);
             //textractorHelper.Init(@"C:\_MyWorkSpace\WorkSpaceTemp\HookTranslator\Textractor\release_v5.1.0");
         }
 
         private async void TestButton02_Click(object sender, RoutedEventArgs e) {
-            await textractorHelper.AttachProcess(4192);
+            await TextractorHelper.Instance.AttachProcess(7828);
         }
 
         private void TestButton03_Click(object sender, RoutedEventArgs e) {
-            textractorHelper?.Destroy();
+            TextractorHelper.Instance?.Destroy();
             ConfigHelper.Instance.WriteAppConfig();
         }
 
         private void TestButton04_Click(object sender, RoutedEventArgs e) {
             textWindow ??= new TextWindow();
             textWindow.Show();
-            if (textractorHelper != null) {
-                textractorHelper.TextOutputAction += textWindow.ChangeText;
-            }
         }
 
         private void TestButton05_Click(object sender, RoutedEventArgs e) {

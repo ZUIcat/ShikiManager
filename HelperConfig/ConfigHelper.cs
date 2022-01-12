@@ -7,7 +7,7 @@ using System.Text.Unicode;
 
 namespace HelperConfig {
     public class ConfigHelper {
-        private static ConfigHelper instance;
+        private static ConfigHelper instance = null!;
 
         public static ConfigHelper Instance {
             get {
