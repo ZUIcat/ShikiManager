@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="SelectionWindow" Height="450" Width="800">
     <Grid>
@@ -15,7 +16,37 @@
 
         <TextBlock Grid.Row="0" Text="Select: "/>
 
-        <ListBox Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl>
+                <!--<ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding}" Margin="0 0 5 5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <system:String>Item #1</system:String>
+                <system:String>Item #2</system:String>
+                <system:String>Item #3</system:String>
+                <system:String>Item #4</system:String>
+                <system:String>Item #5</system:String>
+                <system:String>Item #6</system:String>
+                <system:String>Item #7</system:String>
+                <system:String>Item #8</system:String>
+                <system:String>Item #9</system:String>
+                <system:String>Item #10</system:String>
+                <system:String>Item #11</system:String>
+                <system:String>Item #12</system:String>
+                <system:String>Item #13</system:String>
+                <system:String>Item #14</system:String>
+                <system:String>Item #15</system:String>
+                <system:String>Item #16</system:String>
+                <system:String>Item #17</system:String>
+            </ItemsControl>
+        </ScrollViewer>
 
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Right"

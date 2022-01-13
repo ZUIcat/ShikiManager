@@ -25,7 +25,7 @@
     </WindowChrome.WindowChrome>
 
     <Window.Background>
-        <SolidColorBrush Opacity="0.8" Color="White"/>
+        <SolidColorBrush Opacity="{Binding Path=Value, ElementName=AlphaSlider}" Color="White"/>
     </Window.Background>
 
     <Grid>
@@ -55,6 +55,13 @@
                     Width="50"
                     Click="SettingButton_Click"
                     Content="Setting"/>
+
+                <Slider x:Name="AlphaSlider"
+                        Minimum="0"
+                        Maximum="1"
+                        Value="0.8"
+                        Width="200"
+                        IsDirectionReversed="True"/>
             </StackPanel>
 
             <Border Margin="10 10 10 10"

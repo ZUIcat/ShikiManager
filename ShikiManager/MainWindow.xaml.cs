@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 namespace ShikiManager {
     public partial class MainWindow : Window {
         TextWindow textWindow = null!;
+        SelectionWindow selectionWindow = null!;
 
         public MainWindow() {
             InitializeComponent();
@@ -52,7 +53,8 @@ namespace ShikiManager {
         }
 
         private void TestButton05_Click(object sender, RoutedEventArgs e) {
-
+            selectionWindow ??= new SelectionWindow();
+            selectionWindow.Show();
         }
 
         private void TestButton06_Click(object sender, RoutedEventArgs e) {
