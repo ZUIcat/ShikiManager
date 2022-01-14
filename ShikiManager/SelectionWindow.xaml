@@ -7,6 +7,21 @@
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="SelectionWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="微软雅黑"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="微软雅黑"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5 10 5"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -14,45 +29,55 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Select: "/>
+        <TextBlock Grid.Row="0"
+                   Margin="10 10 10 10"
+                   Text="请选择需要的文本（可多选）: "/>
 
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl>
-                <!--<ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>-->
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding}" Margin="0 0 5 5"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <system:String>Item #1</system:String>
-                <system:String>Item #2</system:String>
-                <system:String>Item #3</system:String>
-                <system:String>Item #4</system:String>
-                <system:String>Item #5</system:String>
-                <system:String>Item #6</system:String>
-                <system:String>Item #7</system:String>
-                <system:String>Item #8</system:String>
-                <system:String>Item #9</system:String>
-                <system:String>Item #10</system:String>
-                <system:String>Item #11</system:String>
-                <system:String>Item #12</system:String>
-                <system:String>Item #13</system:String>
-                <system:String>Item #14</system:String>
-                <system:String>Item #15</system:String>
-                <system:String>Item #16</system:String>
-                <system:String>Item #17</system:String>
-            </ItemsControl>
-        </ScrollViewer>
+        <ListBox Grid.Row="1"
+                 x:Name="TextListBox"
+                 HorizontalContentAlignment="Stretch"
+                 SelectionMode="Multiple"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.CanContentScroll="False">
 
-        <StackPanel Grid.Row="2"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="DarkGray" BorderThickness="1" Padding="10 5 10 5">
+                        <TextBlock Text="{Binding TextData}"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <!--<ListBox.ItemsSource>
+                <d:SampleData ItemCount="10"/>
+            </ListBox.ItemsSource>-->
+
+        </ListBox>
+
+        <DockPanel Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    LastChildFill="False"
                     Margin="10 10 10 10">
-            <Button Content="Confirm"/>
-        </StackPanel>
+
+            <TextBlock DockPanel.Dock="Left"
+                       Text="共有："/>
+            <TextBlock DockPanel.Dock="Left"
+                       Text="{Binding ElementName=TextListBox, Path=Items.Count}"
+                       MinWidth="50"/>
+            <TextBlock DockPanel.Dock="Left"
+                       Text="已选："/>
+            <TextBlock DockPanel.Dock="Left"
+                       Text="{Binding ElementName=TextListBox, Path=SelectedItems.Count}"
+                       MinWidth="50"/>
+
+            <Button DockPanel.Dock="Right"
+                    x:Name="ConfirmButton"
+                    Content="确认"/>
+            <Button DockPanel.Dock="Right"
+                    x:Name="TestButton"
+                    Content="Test"/>
+        </DockPanel>
     </Grid>
 </Window>

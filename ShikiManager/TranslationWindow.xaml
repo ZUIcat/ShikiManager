@@ -39,11 +39,16 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft" >
-                <Button x:Name="CloseButton"
-                    Width="50"
-                    Click="CloseButton_Click"
-                    Content="Close"/>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <Slider x:Name="AlphaSlider"
+                        Minimum="0"
+                        Maximum="1"
+                        Value="0.8"
+                        Width="200"/>
 
                 <Button x:Name="MoveButton"
                     Width="50"
@@ -56,12 +61,11 @@
                     Click="SettingButton_Click"
                     Content="Setting"/>
 
-                <Slider x:Name="AlphaSlider"
-                        Minimum="0"
-                        Maximum="1"
-                        Value="0.8"
-                        Width="200"
-                        IsDirectionReversed="True"/>
+                <Button x:Name="CloseButton"
+                    Width="50"
+                    Click="CloseButton_Click"
+                    Content="Close"/>
+
             </StackPanel>
 
             <Border Margin="10 10 10 10"
