@@ -15,10 +15,7 @@
         Topmost="True"
         WindowStartupLocation="Manual"
         ShowInTaskbar="False"
-        AllowsTransparency="True"
-        Loaded="Window_Loaded"
-        Closed="Window_Closed"
-        StateChanged="Window_StateChanged">
+        AllowsTransparency="True">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
@@ -27,6 +24,15 @@
     <Window.Background>
         <SolidColorBrush Opacity="{Binding Path=Value, ElementName=AlphaSlider}" Color="White"/>
     </Window.Background>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Padding" Value="10 5 10 5"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid>
@@ -51,19 +57,12 @@
                         Width="200"/>
 
                 <Button x:Name="MoveButton"
-                    Width="50"
-                    PreviewMouseDown="MoveButton_PreviewMouseDown"
-                    PreviewTouchDown="MoveButton_PreviewTouchDown"
                     Content="Move"/>
 
                 <Button x:Name="SettingButton"
-                    Width="50"
-                    Click="SettingButton_Click"
                     Content="Setting"/>
 
                 <Button x:Name="CloseButton"
-                    Width="50"
-                    Click="CloseButton_Click"
                     Content="Close"/>
 
             </StackPanel>
@@ -76,8 +75,8 @@
                     <WrapPanel x:Name="TextWarpPanel">
                         <Border Margin="1 1 1 1">
                             <TextBlock>
-                                [Hello]<LineBreak/>
-                                1
+                                あああ<LineBreak/>
+                                啊啊啊
                             </TextBlock>
                         </Border>
                     </WrapPanel>

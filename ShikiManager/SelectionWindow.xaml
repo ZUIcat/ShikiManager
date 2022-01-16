@@ -6,22 +6,20 @@
         xmlns:local="clr-namespace:ShikiManager"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="SelectionWindow" Height="450" Width="800">
+        Title="SelectionWindow"
+        Height="600"
+        Width="800">
 
     <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="微软雅黑"/>
-            <Setter Property="FontSize" Value="14"/>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="Button">
-            <Setter Property="FontFamily" Value="微软雅黑"/>
-            <Setter Property="FontSize" Value="14"/>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Padding" Value="10 5 10 5"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -43,8 +41,28 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="DarkGray" BorderThickness="1" Padding="10 5 10 5">
-                        <TextBlock Text="{Binding TextData}"/>
+                    <Border BorderBrush="CornflowerBlue"
+                            BorderThickness="2"
+                            Padding="4"
+                            Margin="4">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                        <Setter Property="Foreground" Value="Gray"/>
+                                        <Setter Property="FontSize" Value="12"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock Text="{Binding HeadData.CustomIdentification}"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text=" | "/>
+                                <TextBlock Text="{Binding HeadData.HookCode}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <Separator/>
+                            <TextBlock Text="{Binding TextData}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>

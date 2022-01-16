@@ -33,7 +33,7 @@ namespace HelperTextractor {
         /// <summary>
         /// TextractorHelper 输出剧情文本时会调用此事件
         /// </summary>
-        public event Action<TextHookData>? TextOutputEvent;
+        public event Action<TextractorHelper, TextHookData>? TextOutputEvent;
 
         /// <summary>
         /// Textractor 的历史文本队列
@@ -132,7 +132,7 @@ namespace HelperTextractor {
             TextractorOutPutQueue.Enqueue(textHookData);
 
             // 调用外部事件
-            TextOutputEvent?.Invoke(textHookData);
+            TextOutputEvent?.Invoke(this, textHookData);
 
 #if DEBUG
             Trace.TraceInformation("OutputHandler: " + textHookData.TextData);
@@ -219,26 +219,36 @@ namespace HelperTextractor {
         /// </summary>
         /// <param name="textHookHeadData">TextHook 头部信息内容</param>
         /// <returns></returns>
-        public async Task DetachProcessByTextHookData(TextHookHeadData textHookHeadData) {
+        public async Task DetachProcessByTextHookHeadData(TextHookHeadData textHookHeadData) {
             int processID = textHookHeadData.ProcessID;
             string hookAddress = textHookHeadData.Address;
             await DetachProcessByHookAddress(processID, hookAddress);
         }
 
-        /// <summary>
-        /// 向 Textractor 写入命令
-        /// 根据 TextHookHeadData 里的自定义唯一标识数据
-        /// 卸载所有数据<b>不一致</b>的其它 Hook
-        /// </summary>
-        /// <param name="identification">自定义唯一标识数据</param>
-        /// <returns></returns>
-        public async Task DetachProcessByTextHookCustomIdentificationUnequal(string identification) {
-            foreach (var item in GameHookSet) {
-                if (item.CustomIdentification != identification) {
-                    int processID = item.ProcessID;
-                    string hookAddress = item.Address;
-                    await DetachProcessByHookAddress(processID, hookAddress);
-                }
+        ///// <summary>
+        ///// 向 Textractor 写入命令
+        ///// 根据 TextHookHeadData 里的自定义唯一标识数据
+        ///// 卸载所有数据<b>不一致</b>的其它 Hook
+        ///// </summary>
+        ///// <param name="identification">自定义唯一标识数据</param>
+        ///// <returns></returns>
+        //public async Task DetachProcessByTextHookCustomIdentificationUnequal(string identification) {
+        //    foreach (var item in GameHookSet) {
+        //        if (item.CustomIdentification != identification) {
+        //            int processID = item.ProcessID;
+        //            string hookAddress = item.Address;
+        //            await DetachProcessByHookAddress(processID, hookAddress);
+        //        }
+        //    }
+        //}
+
+        public async Task DetachProcessByTextHookData(IEnumerable<TextHookData> textHookData) {
+            var query = GameHookSet
+                .Where(itemA => itemA.Address != "0" && itemA.Address != "FFFFFFFFFFFFFFFF" && !textHookData.Any(itemB => itemB.HeadData.Address == itemA.Address))
+                .GroupBy(item => item.Address)
+                .Select(item => item.First());
+            foreach (var item in query) {
+                await DetachProcessByTextHookHeadData(item);
             }
         }
 
@@ -247,10 +257,11 @@ namespace HelperTextractor {
         /// </summary>
         public async void Destroy() {
             if (TextractorProcess != null && TextractorProcess.HasExited == false) {
-                var ProcessIDs = GameHookSet
+                var query = GameHookSet
                     .Where(item => item.ProcessID > 0)
-                    .Select(item => item.ProcessID);
-                foreach (var item in ProcessIDs) {
+                    .Select(item => item.ProcessID)
+                    .Distinct();
+                foreach (var item in query) {
                     await DetachProcess(item);
                 }
                 TextractorProcess.Kill();

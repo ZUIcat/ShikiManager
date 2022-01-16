@@ -2,6 +2,7 @@
 using HelperTextractor;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -20,18 +21,26 @@ namespace ShikiManager {
     public partial class TextWindow : Window {
         public TextWindow() {
             InitializeComponent();
+
+            // --
+            Loaded += Window_Loaded;
+            Closing += OnWindowClosing;
+            StateChanged += Window_StateChanged;
+            MoveButton.PreviewMouseDown += MoveButton_PreviewMouseDown;
+            MoveButton.PreviewTouchDown += MoveButton_PreviewTouchDown;
+            SettingButton.Click += SettingButton_Click;
+            CloseButton.Click += CloseButton_Click;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             // 设置窗口不获取焦点
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             Winuser.SetWindowNoActivate(wndHelper.Handle);
-
-            TextractorHelper.Instance.TextOutputEvent += ChangeText;
         }
 
-        private void Window_Closed(object sender, EventArgs e) {
-            TextractorHelper.Instance.TextOutputEvent -= ChangeText;
+        private void OnWindowClosing(object? sender, CancelEventArgs e) {
+            e.Cancel = true;
+            HideAndDisconnect();
         }
 
         private void Window_StateChanged(object sender, EventArgs e) {
@@ -49,26 +58,37 @@ namespace ShikiManager {
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e) {
-            ChangeTextImpl("szdgfsg");
+
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
+            HideAndDisconnect();
+        }
+
+        public void ShowAndConnect() {
+            // Show
+            Show();
+            // Connect
+            TextractorHelper.Instance.TextOutputEvent += ShowText;
+        }
+
+        public void HideAndDisconnect() {
+            // Disconnect
+            TextractorHelper.Instance.TextOutputEvent -= ShowText;
+            // Hide
             Hide();
         }
 
-        public void ChangeText(TextHookData textHookData) {
-            Application.Current.Dispatcher.BeginInvoke((Action<string>)((text) => ChangeTextImpl(text)), textHookData.TextData);
-        }
-
-        public void ChangeTextImpl(string text) {
-            Trace.TraceInformation("ffffffffffffffffffffffffff"); // TODO 为啥关闭了之后还会调用？？
-            TextWarpPanel.Children.Clear();
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = $"[{text}]\n{text}";
-            Border border = new Border();
-            border.Margin = new Thickness(1, 1, 1, 1);
-            border.Child = textBlock;
-            TextWarpPanel.Children.Add(border);
+        public void ShowText(TextractorHelper th, TextHookData textHookData) {
+            Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
+                TextWarpPanel.Children.Clear();
+                var textBlock = new TextBlock();
+                textBlock.Text = $"[{textHookData.TextData}]\n{textHookData.TextData}";
+                var border = new Border();
+                border.Margin = new Thickness(1, 1, 1, 1);
+                border.Child = textBlock;
+                TextWarpPanel.Children.Add(border);
+            }), textHookData);
         }
     }
 }

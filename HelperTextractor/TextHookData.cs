@@ -66,7 +66,7 @@ namespace HelperTextractor {
         }
     }
 
-    public struct TextHookHeadData : IEquatable<TextHookHeadData> {
+    public struct TextHookHeadData : IEquatable<TextHookHeadData>, IComparable<TextHookHeadData> {
         /// <summary>
         /// 进程 ID
         /// </summary>
@@ -122,6 +122,10 @@ namespace HelperTextractor {
 
         public override int GetHashCode() {
             return HashCode.Combine(CustomIdentification);
+        }
+
+        public int CompareTo(TextHookHeadData other) {
+            return CustomIdentification.CompareTo(other.CustomIdentification);
         }
 
         public static bool operator ==(TextHookHeadData left, TextHookHeadData right) {
