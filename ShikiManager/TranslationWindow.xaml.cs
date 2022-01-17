@@ -79,7 +79,7 @@ namespace ShikiManager {
             Hide();
         }
 
-        public void ShowText(TextractorHelper th, TextHookData textHookData) {
+        public void ShowText(TextHookData textHookData) {
             Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
                 TextWarpPanel.Children.Clear();
                 var textBlock = new TextBlock();

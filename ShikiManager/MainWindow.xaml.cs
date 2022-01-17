@@ -39,7 +39,7 @@ namespace ShikiManager {
         }
 
         private async void TestButton02_Click(object sender, RoutedEventArgs e) {
-            await TextractorHelper.Instance.AttachProcess(14676);
+            await TextractorHelper.Instance.AttachProcess(10488);
         }
 
         private void TestButton03_Click(object sender, RoutedEventArgs e) {

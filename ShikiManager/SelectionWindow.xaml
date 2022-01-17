@@ -93,9 +93,6 @@
             <Button DockPanel.Dock="Right"
                     x:Name="ConfirmButton"
                     Content="确认"/>
-            <Button DockPanel.Dock="Right"
-                    x:Name="TestButton"
-                    Content="Test"/>
         </DockPanel>
     </Grid>
 </Window>
