@@ -18,6 +18,10 @@
         <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Padding" Value="10 5 10 5"/>
         </Style>
+
+        <Style TargetType="CheckBox" BasedOn="{StaticResource BaseCheckBoxStyle}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -74,10 +78,8 @@
         </ListBox>
 
         <DockPanel Grid.Row="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    LastChildFill="False"
-                    Margin="10 10 10 10">
+                   LastChildFill="False"
+                   Margin="10 10 10 10">
 
             <TextBlock DockPanel.Dock="Left"
                        Text="共有："/>
@@ -89,6 +91,10 @@
             <TextBlock DockPanel.Dock="Left"
                        Text="{Binding ElementName=TextListBox, Path=SelectedItems.Count}"
                        MinWidth="50"/>
+
+            <CheckBox DockPanel.Dock="Left"
+                      x:Name="AutoDetachCheckBox"
+                      Content="自动 Detach 其它未选中的 Hook"/>
 
             <Button DockPanel.Dock="Right"
                     x:Name="ConfirmButton"

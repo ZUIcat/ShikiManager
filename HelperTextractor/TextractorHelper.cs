@@ -229,23 +229,19 @@ namespace HelperTextractor {
                 // 找出符合条件的
                 var query2 = TextractorOutPutDic.Keys
                     .Where(itemA => itemA.ProcessID == item.Key && item.All(itemB => itemB.HeadData.Address != itemA.Address));
-                // 删除文本储存字典中相应的键值
-                foreach (var item2 in query2) {
-                    TextractorOutPutDic.Remove(item2);
-                }
                 // 按 Address 去重
                 var query3 = query2
                     .GroupBy(item => item.Address)
                     .Select(item => item.First());
-                // Detach
+                // Detach Hook
                 foreach (var item2 in query3) {
                     await DetachProcessByTextHookHeadData(item2);
                 }
-//                不加 0 FFFF
-
-//// "cmake.buildTask": true, // 有 BUG
-//                "cmake.buildBeforeRun": false,
-
+                // 删除文本储存字典中相应的键值
+                // 为啥没报错是因为：https://docs.microsoft.com/zh-cn/dotnet/api/system.collections.generic.dictionary-2.enumerator?view=net-6.0
+                foreach (var item2 in query2) {
+                    TextractorOutPutDic.Remove(item2);
+                }
             }
         }
 

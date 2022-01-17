@@ -1,13 +1,26 @@
 ﻿using HelperTextractor;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace ShikiManager {
     public partial class SelectionWindow : Window {
+        /// <summary>
+        /// 自动 Detach 其它未选中的 Hook
+        /// </summary>
+        public bool AutoDetach { get; set; } = true;
+
         public SelectionWindow() {
             InitializeComponent();
+            // Binding
+            DataContext = this;
+            AutoDetachCheckBox.SetBinding(CheckBox.IsCheckedProperty, new Binding("AutoDetach") {
+                AsyncState = BindingMode.TwoWay // TODO 不起作用
+            });
             // Event
             Closing += OnWindowClosing;
             ConfirmButton.Click += OnConfirmButtonClick;
@@ -19,11 +32,13 @@ namespace ShikiManager {
         }
 
         private async void OnConfirmButtonClick(object sender, RoutedEventArgs e) {
-            // Detach Hook
-            var selectedItems = TextListBox.SelectedItems.OfType<TextHookData>();
-            await TextractorHelper.Instance.DetachProcessByTextHookData(selectedItems);
-            // Clear UI
-            TextListBox.Items.Clear();
+            if (AutoDetach) {
+                // Detach Hook
+                var selectedItems = TextListBox.SelectedItems.OfType<TextHookData>();
+                await TextractorHelper.Instance.DetachProcessByTextHookData(selectedItems);
+                // Clear UI
+                TextListBox.Items.Clear();
+            }
         }
 
         public void ShowAndConnect() {

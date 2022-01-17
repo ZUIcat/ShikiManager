@@ -21,8 +21,7 @@ namespace ShikiManager {
     public partial class TextWindow : Window {
         public TextWindow() {
             InitializeComponent();
-
-            // --
+            // Event
             Loaded += Window_Loaded;
             Closing += OnWindowClosing;
             StateChanged += Window_StateChanged;

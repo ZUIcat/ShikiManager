@@ -48,13 +48,15 @@
             <StackPanel Grid.Row="0"
                         Grid.Column="0"
                         Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right"
+                        Opacity="{Binding Path=Value, ElementName=AlphaSlider}">
 
                 <Slider x:Name="AlphaSlider"
                         Minimum="0"
                         Maximum="1"
                         Value="0.8"
-                        Width="200"/>
+                        Width="200"
+                        VerticalAlignment="Center"/>
 
                 <Button x:Name="MoveButton"
                     Content="Move"/>
