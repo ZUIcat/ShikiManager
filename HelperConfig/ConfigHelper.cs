@@ -11,9 +11,7 @@ namespace HelperConfig {
 
         public static ConfigHelper Instance {
             get {
-                if (instance == null) {
-                    instance = new ConfigHelper();
-                }
+                instance ??= new ConfigHelper();
                 return instance;
             }
         }

@@ -14,9 +14,7 @@ namespace HelperTextractor {
 
         public static TextractorHelper Instance {
             get {
-                if (instance == null) {
-                    instance = new TextractorHelper();
-                }
+                instance ??= new TextractorHelper();
                 return instance;
             }
         }

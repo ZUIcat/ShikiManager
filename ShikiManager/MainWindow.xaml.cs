@@ -29,7 +29,6 @@ namespace ShikiManager {
             };
             Trace.Listeners.Add(defaultListener);
 
-            ConfigHelper.Instance.ReadAppConfig();
             //TextHookData.TextDataFilterFunc = TextDataFilter.Remove2SameChar;
         }
 

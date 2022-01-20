@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperConfig;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,6 +12,11 @@ namespace ShikiManager {
         private MainWindow? mainWindow;
 
         private void Application_Startup(object sender, StartupEventArgs e) {
+            // Init DataManager
+            DataManager.Instance.Create();
+            // Read App Config
+            ConfigHelper.Instance.ReadAppConfig();
+            // Show MainWindow
             mainWindow ??= new MainWindow();
             mainWindow.Show();
         }
