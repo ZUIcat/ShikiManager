@@ -1,4 +1,4 @@
-﻿<Window x:Class="ShikiManager.TextWindow"
+﻿<Window x:Class="ShikiManager.TranslationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -52,7 +52,7 @@
                         Opacity="{Binding Path=Value, ElementName=AlphaSlider}">
 
                 <Slider x:Name="AlphaSlider"
-                        Minimum="0"
+                        Minimum="0.1"
                         Maximum="1"
                         Value="0.8"
                         Width="200"
@@ -64,8 +64,8 @@
                 <Button x:Name="SettingButton"
                     Content="Setting"/>
 
-                <Button x:Name="CloseButton"
-                    Content="Close"/>
+                <Button x:Name="HideButton"
+                    Content="Hide"/>
 
             </StackPanel>
 

@@ -3,7 +3,7 @@
         public string DirPath { get; set; }
 
         public LocaleEmulatorConfig() {
-            DirPath = @".\LocaleEmulator";
+            DirPath = @".\Data\LocaleEmulator";
         }
     }
 }

@@ -3,7 +3,7 @@
         public string DirPath { get; set; }
 
         public TextractorConfig() {
-            DirPath = @".\Textractor";
+            DirPath = @".\Data\Textractor";
         }
     }
 }

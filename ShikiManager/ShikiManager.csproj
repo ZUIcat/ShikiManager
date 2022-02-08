@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
     <ProjectReference Include="..\HelperLocaleEmulator\HelperLocaleEmulator.csproj" />
     <ProjectReference Include="..\HelperMeCab\HelperMeCab.csproj" />
     <ProjectReference Include="..\HelperNtleas\HelperNtleas.csproj" />
+    <ProjectReference Include="..\HelperProcess\HelperProcess.csproj" />
     <ProjectReference Include="..\HelperTextractor\HelperTextractor.csproj" />
   </ItemGroup>
 

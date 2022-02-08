@@ -28,40 +28,48 @@ namespace ShikiManager {
 
         private void OnWindowClosing(object? sender, CancelEventArgs e) {
             e.Cancel = true;
-            HideAndDisconnect();
+            Hide();
         }
 
         private async void OnConfirmButtonClick(object sender, RoutedEventArgs e) {
+            var selectedItems = TextListBox.SelectedItems.OfType<TextHookData>();
+
+            DataManager.Instance.SelectHeadDataList.Clear();
+            foreach (var item in selectedItems) {
+                DataManager.Instance.SelectHeadDataList.Add(item.HeadData);
+            }
+            
             if (AutoDetach) {
                 // Detach Hook
-                var selectedItems = TextListBox.SelectedItems.OfType<TextHookData>();
-                await TextractorHelper.Instance.DetachProcessByTextHookData(selectedItems);
+                await DataManager.Instance.TextractorHelper.DetachProcessByTextHookData(selectedItems);
                 // Clear UI
                 TextListBox.Items.Clear();
             }
         }
 
-        public void ShowAndConnect() {
+        public new void Show() {
             // Show
-            Show();
+            base.Show();
             // Connect
-            TextractorHelper.Instance.TextOutputEvent += ShowTextInListBox;
+            DataManager.Instance.TextractorHelper.TextOutputEvent += ShowTextInListBox;
         }
 
-        public void HideAndDisconnect() {
+        public new void Hide() {
             // Disconnect
-            TextractorHelper.Instance.TextOutputEvent -= ShowTextInListBox;
+            DataManager.Instance.TextractorHelper.TextOutputEvent -= ShowTextInListBox;
             // Hide
-            Hide();
+            base.Hide();
         }
 
         private void ShowTextInListBox(TextHookData textHookData) {
             Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
                 TextListBox.Items.Clear();
-                TextractorHelper.Instance.TextractorOutPutDic.Values
-                .OrderBy(x => x.HeadData).ToList().ForEach(x => {
-                    TextListBox.Items.Add(x);
-                });
+                DataManager.Instance.TextractorHelper.TextractorOutPutDic.Values
+                    .OrderBy(x => x.HeadData)
+                    .ToList()
+                    .ForEach(x => {
+                        TextListBox.Items.Add(x);
+                    });
             }), textHookData);
         }
     }

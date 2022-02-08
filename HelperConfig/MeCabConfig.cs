@@ -1,16 +1,9 @@
 ﻿namespace HelperConfig {
     public class MeCabConfig {
         public string DirPath { get; set; }
-        public MeCabDicType DicType { get; set; }
 
         public MeCabConfig() {
-            DirPath = @".\MeCabDic\ipadic-2.7.0-20070801";
-            DicType = MeCabDicType.IPADIC;
+            DirPath = @".\Data\MeCabDic\unidic-csj-3.1.0";
         }
-    }
-
-    public enum MeCabDicType {
-        IPADIC,
-        UNIDIC22
     }
 }

@@ -1,4 +1,6 @@
 ﻿using HelperConfig;
+using HelperMeCab;
+using HelperProcess;
 using HelperTextractor;
 using System;
 using System.Collections.Generic;
@@ -25,12 +27,19 @@ namespace ShikiManager {
 
         // Share Property
         public List<TextHookHeadData> SelectHeadDataList { get; private set; }
+        public ProcessInfo ProcessInfo { get; set; }
+        public Func<string, string>? TextFilterFunc { get; set; }
 
         // Share Manager
         public ConfigHelper ConfigHelper { get; private set; }
+        public TextractorHelper TextractorHelper { get; private set; }
+        public MeCabUniDic22Wrapper MeCabUniDic22Wrapper { get; private set; } // TODO IpaDic
 
         private DataManager() {
             SelectHeadDataList = new List<TextHookHeadData>();
+            ConfigHelper = ConfigHelper.Instance;
+            TextractorHelper = TextractorHelper.Instance;
+            MeCabUniDic22Wrapper = null!;
         }
 
         /// <summary>
@@ -39,6 +48,9 @@ namespace ShikiManager {
         /// </summary>
         /// <returns>是否成功</returns>
         public bool Create() {
+            ConfigHelper.ReadAppConfig();
+            TextractorHelper.Create(ConfigHelper.AppConfig.TextractorConfig.DirPath);
+            MeCabUniDic22Wrapper = new MeCabUniDic22Wrapper(ConfigHelper.AppConfig.MeCabConfig.DirPath);
             return true;
         }
 
@@ -50,6 +62,10 @@ namespace ShikiManager {
         public bool Destroy() {
             SelectHeadDataList.Clear();
             SelectHeadDataList = null!;
+
+            ConfigHelper.WriteAppConfig();
+            TextractorHelper.Destroy();
+            MeCabUniDic22Wrapper.Destroy();
             return true;
         }
     }

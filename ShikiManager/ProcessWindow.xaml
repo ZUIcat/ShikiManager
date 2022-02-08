@@ -1,11 +1,11 @@
-﻿<Window x:Class="ShikiManager.SelectionWindow"
+﻿<Window x:Class="ShikiManager.ProcessWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
         mc:Ignorable="d"
-        Title="SelectionWindow"
+        Title="ProcessWindow"
         Height="600"
         Width="800">
 
@@ -32,12 +32,12 @@
 
         <TextBlock Grid.Row="0"
                    Margin="10 10 10 10"
-                   Text="请选择需要的文本（可多选）: "/>
+                   Text="请选择目标游戏进程: "/>
 
         <ListBox Grid.Row="1"
-                 x:Name="TextListBox"
+                 x:Name="ProcessListBox"
                  HorizontalContentAlignment="Stretch"
-                 SelectionMode="Multiple"
+                 SelectionMode="Single"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  ScrollViewer.CanContentScroll="False">
@@ -56,14 +56,14 @@
                                         <Setter Property="FontSize" Value="12"/>
                                     </Style>
                                 </StackPanel.Resources>
-                                <TextBlock Text="{Binding HeadData.CustomIdentification}"
+                                <TextBlock Text="{Binding Name}"
                                            TextWrapping="Wrap"/>
                                 <TextBlock Text=" | "/>
-                                <TextBlock Text="{Binding HeadData.HookCode}"
+                                <TextBlock Text="{Binding ID}"
                                            TextWrapping="Wrap"/>
                             </StackPanel>
                             <Separator/>
-                            <TextBlock Text="{Binding TextData}"
+                            <TextBlock Text="{Binding FileName}"
                                        TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
@@ -80,7 +80,7 @@
                    LastChildFill="False"
                    Margin="10 10 10 10">
 
-            <TextBlock DockPanel.Dock="Left"
+            <!--<TextBlock DockPanel.Dock="Left"
                        Text="共有："/>
             <TextBlock DockPanel.Dock="Left"
                        Text="{Binding ElementName=TextListBox, Path=Items.Count}"
@@ -93,11 +93,17 @@
 
             <CheckBox DockPanel.Dock="Left"
                       x:Name="AutoDetachCheckBox"
-                      Content="自动 Detach 其它未选中的 Hook"/>
+                      Content="自动 Detach 其它未选中的 Hook"/>-->
 
-            <Button DockPanel.Dock="Right"
-                    x:Name="ConfirmButton"
-                    Content="确认"/>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="RefreshButton"
+                        Margin="10 0 10 0"
+                        Content="刷新"/>
+                <Button x:Name="ConfirmButton"
+                        Margin="10 0 10 0"
+                        Content="确认"/>
+            </StackPanel>
+
         </DockPanel>
     </Grid>
 </Window>

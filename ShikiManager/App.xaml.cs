@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,10 +13,16 @@ namespace ShikiManager {
         private MainWindow? mainWindow;
 
         private void Application_Startup(object sender, StartupEventArgs e) {
-            // Init DataManager
+            // TODO Logger
+            Trace.Listeners.RemoveAt(0);
+            var defaultListener = new DefaultTraceListener {
+                //LogFileName = "./sss.log"
+            };
+            Trace.Listeners.Add(defaultListener);
+
+            // Create DataManager
             DataManager.Instance.Create();
-            // Read App Config
-            ConfigHelper.Instance.ReadAppConfig();
+
             // Show MainWindow
             mainWindow ??= new MainWindow();
             mainWindow.Show();

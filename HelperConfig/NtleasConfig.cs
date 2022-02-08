@@ -3,7 +3,7 @@
         public string DirPath { get; set; }
 
         public NtleasConfig() {
-            DirPath = @".\Ntleas";
+            DirPath = @".\Data\Ntleas";
         }
     }
 }

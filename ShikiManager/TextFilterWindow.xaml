@@ -1,0 +1,73 @@
+﻿<Window x:Class="ShikiManager.TextFilterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShikiManager"
+        mc:Ignorable="d"
+        Title="TextReplaceWindow"
+        Height="600"
+        Width="800">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Padding" Value="10 5 10 5"/>
+        </Style>
+
+        <Style TargetType="CheckBox" BasedOn="{StaticResource BaseCheckBoxStyle}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="10 10 10 10"
+                   Text="请选择合适的文本替换方法: "/>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto"
+                CanContentScroll="False">
+                <TextBlock x:Name="OldText" />
+            </ScrollViewer>
+
+            <ComboBox Grid.Row="1"
+                x:Name="TextFilterComboBox"
+                Height="30">
+            </ComboBox>
+
+            <ScrollViewer  Grid.Row="2"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto"
+                CanContentScroll="False">
+                <TextBlock x:Name="NewText" />
+            </ScrollViewer>
+        </Grid>
+
+        <DockPanel Grid.Row="2"
+                   LastChildFill="False"
+                   Margin="10 10 10 10">
+
+            <Button DockPanel.Dock="Right"
+                    x:Name="ConfirmButton"
+                    Content="确认"/>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -26,6 +26,22 @@ namespace HelperTextractor {
             return new string(newCharArray);
         }
 
+        public static string Remove4SameChar(string text) {
+            var newCharArray = new char[text.Length / 4];
+            for (int i = 0, j = 0; j < newCharArray.Length; i += 4, j += 1) {
+                newCharArray[j] = text[i];
+            }
+            return new string(newCharArray);
+        }
+
+        public static string Remove5SameChar(string text) {
+            var newCharArray = new char[text.Length / 5];
+            for (int i = 0, j = 0; j < newCharArray.Length; i += 5, j += 1) {
+                newCharArray[j] = text[i];
+            }
+            return new string(newCharArray);
+        }
+
         public static string RemoveNSameChar(string text) {
             var newCharArray = new char[text.Length / NSameChar];
             for (int i = 0, j = 0; j < newCharArray.Length; i += NSameChar, j += 1) {

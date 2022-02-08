@@ -1,7 +1,6 @@
 ﻿using NMeCab.Specialized;
 
 namespace HelperMeCab {
-    // TODO 感觉这类毫无必要啊
     public class MeCabUniDic22Wrapper {
         private MeCabUniDic22Tagger UniDic22Tagger { get; set; }
 

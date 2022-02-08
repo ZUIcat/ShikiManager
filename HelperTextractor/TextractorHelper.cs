@@ -244,17 +244,27 @@ namespace HelperTextractor {
         }
 
         /// <summary>
+        /// 向 Textractor 写入命令
+        /// 卸载所有的 Hook
+        /// </summary>
+        /// <returns></returns>
+        public async Task DetachAllProcess() {
+            var query = TextractorOutPutDic.Keys
+                .Where(item => item.ProcessID > 0)
+                .Select(item => item.ProcessID)
+                .Distinct();
+            foreach (var item in query) {
+                await DetachProcess(item);
+            }
+            TextractorOutPutDic.Clear(); // TODO 与 Destroy 重复
+        }
+
+        /// <summary>
         /// 关闭 Textractor 进程，关闭前 Detach 所有 Hook
         /// </summary>
         public async void Destroy() {
             if (TextractorProcess != null && TextractorProcess.HasExited == false) {
-                var query = TextractorOutPutDic.Keys
-                    .Where(item => item.ProcessID > 0)
-                    .Select(item => item.ProcessID)
-                    .Distinct();
-                foreach (var item in query) {
-                    await DetachProcess(item);
-                }
+                await DetachAllProcess();
                 TextractorProcess.Kill();
             }
             TextractorProcess?.Dispose();

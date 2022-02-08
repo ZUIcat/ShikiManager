@@ -2,6 +2,7 @@
 using HelperTextractor;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -18,46 +19,18 @@ using System.Windows.Shapes;
 
 namespace ShikiManager {
     public partial class MainWindow : Window {
-        TextWindow textWindow = null!;
-        SelectionWindow selectionWindow = null!;
 
         public MainWindow() {
             InitializeComponent();
-            Trace.Listeners.RemoveAt(0);
-            var defaultListener = new DefaultTraceListener {
-                //LogFileName = "./sss.log"
-            };
-            Trace.Listeners.Add(defaultListener);
+            // Event
+            Closing += OnWindowClosing;
 
-            //TextHookData.TextDataFilterFunc = TextDataFilter.Remove2SameChar;
+            PageFrame.Navigate(new Uri("MainWindowPage/HomePage.xaml", UriKind.Relative));
         }
 
-        private void TestButton01_Click(object sender, RoutedEventArgs e) {
-            TextractorHelper.Instance.Create(ConfigHelper.Instance.AppConfig.TextractorConfig.DirPath);
-            //textractorHelper.Init(@"C:\_MyWorkSpace\WorkSpaceTemp\HookTranslator\Textractor\release_v5.1.0");
-        }
-
-        private async void TestButton02_Click(object sender, RoutedEventArgs e) {
-            await TextractorHelper.Instance.AttachProcess(12944);
-        }
-
-        private void TestButton03_Click(object sender, RoutedEventArgs e) {
-            TextractorHelper.Instance?.Destroy();
-            ConfigHelper.Instance.WriteAppConfig();
-        }
-
-        private void TestButton04_Click(object sender, RoutedEventArgs e) {
-            textWindow ??= new TextWindow();
-            textWindow.ShowAndConnect();
-        }
-
-        private void TestButton05_Click(object sender, RoutedEventArgs e) {
-            selectionWindow ??= new SelectionWindow();
-            selectionWindow.ShowAndConnect();
-        }
-
-        private void TestButton06_Click(object sender, RoutedEventArgs e) {
-
+        private void OnWindowClosing(object? sender, CancelEventArgs e) {
+            // Destroy DataManager
+            DataManager.Instance.Destroy();
         }
     }
 }
