@@ -42,9 +42,12 @@ namespace ShikiManager {
             if (AutoDetach) {
                 // Detach Hook
                 await DataManager.Instance.TextractorHelper.DetachProcessByTextHookData(selectedItems);
-                // Clear UI
-                TextListBox.Items.Clear();
+                // Refresh UI
+                ShowTextInListBox(null!);
             }
+
+            MessageBox.Show("已成功选择！\n可手动关闭本窗口。");
+            // Hide();
         }
 
         public new void Show() {
@@ -52,6 +55,8 @@ namespace ShikiManager {
             base.Show();
             // Connect
             DataManager.Instance.TextractorHelper.TextOutputEvent += ShowTextInListBox;
+            // 为了即时显示，每次 Show 之后就立即显示一次
+            ShowTextInListBox(null!);
         }
 
         public new void Hide() {
@@ -61,8 +66,11 @@ namespace ShikiManager {
             base.Hide();
         }
 
-        private void ShowTextInListBox(TextHookData textHookData) {
-            Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
+        private void ShowTextInListBox(TextHookData _) {
+            // 虽然每次输出都调用一次这个方法有些浪费
+            // 但是这不是长期开着的窗口，感觉问题不大
+            Application.Current.Dispatcher.BeginInvoke(() => {
+                // 把 Items 全清了后，把 TextractorHelper 暂存字典里的值都拿来排序后显示
                 TextListBox.Items.Clear();
                 DataManager.Instance.TextractorHelper.TextractorOutPutDic.Values
                     .OrderBy(x => x.HeadData)
@@ -70,7 +78,15 @@ namespace ShikiManager {
                     .ForEach(x => {
                         TextListBox.Items.Add(x);
                     });
-            }), textHookData);
+                // 若存在已经选中的项，选中它们
+                // TextListBox.SelectedItems.Clear(); // 上面已经 Clear 了 Items，这里不需要 Clear
+                DataManager.Instance.TextractorHelper.TextractorOutPutDic.Values
+                   .Where(x => DataManager.Instance.SelectHeadDataList.Contains(x.HeadData)) // 改成 Linq 嵌套？
+                   .ToList()
+                   .ForEach((x) => {
+                       TextListBox.SelectedItems.Add(x);
+                   });
+            });
         }
     }
 }

@@ -14,7 +14,7 @@
             <Button x:Name="ProcessButton"
                     Content="SelectProcess"/>
             <Button x:Name="SelectTextButton"
-                    Content="SelectText"/>
+                    Content="SelectText" Cursor="Hand"/>
             <Button x:Name="SelectFilterButton"
                     Content="SelectFilter"/>
             <Button x:Name="ShowTranslationWindow"
