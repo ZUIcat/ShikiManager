@@ -4,10 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShikiManager"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}" 
         Title="SelectionWindow"
         Height="600"
         Width="800">
@@ -15,17 +12,14 @@
     <Window.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         </Style>
 
         <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Padding" Value="10 5 10 5"/>
-            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         </Style>
 
         <Style TargetType="CheckBox" BasedOn="{StaticResource BaseCheckBoxStyle}">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
         </Style>
     </Window.Resources>
 
