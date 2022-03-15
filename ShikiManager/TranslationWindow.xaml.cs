@@ -93,12 +93,18 @@ namespace ShikiManager {
                         var tmpStackPanel = new StackPanel();
                         tmpStackPanel.Orientation = Orientation.Vertical;
 
-                        var textBlock1 = new TextBlock();
+                        var textBlock1 = new TextBox();
+                        textBlock1.BorderThickness = new Thickness(0);
+                        textBlock1.IsReadOnly = true;
+                        textBlock1.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                         textBlock1.Text = $"{meCabNode.Surface}";
                         tmpStackPanel.Children.Add(textBlock1);
 
-                        var textBlock2 = new TextBlock();
-                        textBlock2.Text = $"{meCabNode.Pron}";
+                        var textBlock2 = new TextBox();
+                        textBlock2.BorderThickness = new Thickness(0);
+                        textBlock2.IsReadOnly = true;
+                        textBlock2.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                        textBlock2.Text = $"{meCabNode.LForm}";
                         tmpStackPanel.Children.Add(textBlock2);
 
                         var border = new Border();

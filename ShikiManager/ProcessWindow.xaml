@@ -80,21 +80,6 @@
                    LastChildFill="False"
                    Margin="10 10 10 10">
 
-            <!--<TextBlock DockPanel.Dock="Left"
-                       Text="共有："/>
-            <TextBlock DockPanel.Dock="Left"
-                       Text="{Binding ElementName=TextListBox, Path=Items.Count}"
-                       MinWidth="50"/>
-            <TextBlock DockPanel.Dock="Left"
-                       Text="已选："/>
-            <TextBlock DockPanel.Dock="Left"
-                       Text="{Binding ElementName=TextListBox, Path=SelectedItems.Count}"
-                       MinWidth="50"/>
-
-            <CheckBox DockPanel.Dock="Left"
-                      x:Name="AutoDetachCheckBox"
-                      Content="自动 Detach 其它未选中的 Hook"/>-->
-
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                 <Button x:Name="RefreshButton"
                         Margin="10 0 10 0"

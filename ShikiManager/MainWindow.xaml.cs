@@ -19,18 +19,44 @@ using System.Windows.Shapes;
 
 namespace ShikiManager {
     public partial class MainWindow : Window {
+        private Uri homePageUri;
+        private Uri settingPageUri;
+        private Uri aboutPageUri;
 
         public MainWindow() {
             InitializeComponent();
             // Event
             Closing += OnWindowClosing;
+            Loaded += OnWindowLoaded;
+            HomeButton.Click += OnHomeButtonClick;
+            SettingButton.Click += OnSettingButtonClick;
+            AboutButton.Click += OnAboutButtonClick;
 
-            PageFrame.Navigate(new Uri("MainWindowPage/HomePage.xaml", UriKind.Relative));
+            homePageUri = new Uri("MainWindowPage/HomePage.xaml", UriKind.Relative);
+            settingPageUri = new Uri("MainWindowPage/SettingPage.xaml", UriKind.Relative);
+            aboutPageUri = new Uri("MainWindowPage/AboutPage.xaml", UriKind.Relative);
+        }
+
+        private void OnWindowLoaded(object sender, RoutedEventArgs e) {
+            // Default to load the home page
+            PageFrame.Navigate(homePageUri);
         }
 
         private void OnWindowClosing(object? sender, CancelEventArgs e) {
             // Destroy DataManager
             DataManager.Instance.Destroy();
+        }
+
+        private void OnHomeButtonClick(object sender, RoutedEventArgs e) {
+            PageFrame.Navigate(homePageUri);
+        }
+
+        private void OnSettingButtonClick(object sender, RoutedEventArgs e) {
+            PageFrame.Navigate(settingPageUri);
+        }
+
+        private void OnAboutButtonClick(object sender, RoutedEventArgs e) {
+            PageFrame.Navigate(aboutPageUri);
         }
     }
 }

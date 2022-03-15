@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TextWindow"
         Height="200"
-        Width="800"
+        Width="1250"
         MinHeight="50"
         MinWidth="400"
         ResizeMode="CanResize"
@@ -27,6 +27,13 @@
 
     <Window.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="FontFamily" Value="微软雅黑"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource BaseTextBoxStyle}">
+            <Setter Property="FontFamily" Value="微软雅黑"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
 
         <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
@@ -76,10 +83,7 @@
                               VerticalScrollBarVisibility="Auto">
                     <WrapPanel x:Name="TextWarpPanel">
                         <Border Margin="1 1 1 1">
-                            <TextBlock>
-                                あああ<LineBreak/>
-                                啊啊啊
-                            </TextBlock>
+                            <TextBlock Text="点击游戏以显示文本……"/>
                         </Border>
                     </WrapPanel>
                 </ScrollViewer>

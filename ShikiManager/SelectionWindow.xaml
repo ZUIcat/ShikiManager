@@ -76,7 +76,7 @@
 
         </ListBox>
 
-        <Grid Grid.Row="1"
+        <!--<Grid Grid.Row="1"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Center">
             <Grid.Resources>
@@ -92,7 +92,7 @@
             <TextBlock Margin="15"
                        TextAlignment="Center"
                        Text="已成功选择！&#13;可手动关闭本窗口。"/>
-        </Grid>
+        </Grid>-->
 
         <DockPanel Grid.Row="2"
                    LastChildFill="False"

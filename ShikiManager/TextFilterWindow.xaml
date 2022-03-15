@@ -45,7 +45,8 @@
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto"
                 CanContentScroll="False">
-                <TextBlock x:Name="OldText" />
+                <TextBlock x:Name="OldText"
+                           TextWrapping="Wrap"/>
             </ScrollViewer>
 
             <ComboBox Grid.Row="1"
@@ -57,7 +58,8 @@
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto"
                 CanContentScroll="False">
-                <TextBlock x:Name="NewText" />
+                <TextBlock x:Name="NewText"
+                           TextWrapping="Wrap"/>
             </ScrollViewer>
         </Grid>
 

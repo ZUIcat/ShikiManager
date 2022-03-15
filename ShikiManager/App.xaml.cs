@@ -13,12 +13,13 @@ namespace ShikiManager {
         private MainWindow? mainWindow;
 
         private void Application_Startup(object sender, StartupEventArgs e) {
-            // TODO Logger
+            // TODO == Logger ==
             Trace.Listeners.RemoveAt(0);
             var defaultListener = new DefaultTraceListener {
                 //LogFileName = "./sss.log"
             };
             Trace.Listeners.Add(defaultListener);
+            // == Logger ==
 
             // Create DataManager
             DataManager.Instance.Create();

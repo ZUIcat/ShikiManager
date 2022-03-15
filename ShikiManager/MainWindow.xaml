@@ -25,6 +25,7 @@
         </StackPanel>
 
         <Frame Grid.Column="1"
-               x:Name="PageFrame"/>
+               x:Name="PageFrame"
+               NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

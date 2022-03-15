@@ -6,6 +6,11 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
+    <Style TargetType="TextBox" x:Key="BaseTextBoxStyle">
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
     <Style TargetType="Button" x:Key="BaseButtonStyle">
         <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
         <Setter Property="FontFamily" Value="微软雅黑"/>
