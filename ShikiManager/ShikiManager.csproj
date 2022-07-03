@@ -30,6 +30,7 @@
     <ProjectReference Include="..\HelperNtleas\HelperNtleas.csproj" />
     <ProjectReference Include="..\HelperProcess\HelperProcess.csproj" />
     <ProjectReference Include="..\HelperTextractor\HelperTextractor.csproj" />
+    <ProjectReference Include="..\HelperTranslator\HelperTranslator.csproj" />
   </ItemGroup>
 
 </Project>

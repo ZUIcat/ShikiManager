@@ -37,6 +37,11 @@ namespace ShikiManager {
             }
         }
 
+        public new void Show() {
+            base.Show();
+            ShowProcessInListBox();
+        }
+
         private void ShowProcessInListBox() {
             ProcessListBox.Items.Clear();
             ProcessHelper.GetProcessInfoList()

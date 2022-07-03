@@ -1,5 +1,6 @@
 ﻿using HelperExternDll;
 using HelperTextractor;
+using HelperTranslator;
 using NMeCab.Specialized;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ using System.Windows.Shapes;
 
 namespace ShikiManager {
     public partial class TranslationWindow : Window {
+        private string nowOriText = string.Empty;
+        private string nowTransText = string.Empty;
+
         public TranslationWindow() {
             InitializeComponent();
             // Event
@@ -28,6 +32,7 @@ namespace ShikiManager {
             StateChanged += OnWindowStateChanged;
             MoveButton.PreviewMouseDown += OnMoveButtonPreviewMouseDown;
             MoveButton.PreviewTouchDown += OnMoveButtonPreviewTouchDown;
+            CopyButton.Click += OnCopyButtonClick;
             SettingButton.Click += OnSettingButtonClick;
             HideButton.Click += OnHideButtonClick;
         }
@@ -57,6 +62,12 @@ namespace ShikiManager {
             DragMove();
         }
 
+        private void OnCopyButtonClick(object sender, RoutedEventArgs e) {
+            if (nowOriText != null) {
+                Clipboard.SetText(nowOriText);
+            }
+        }
+
         private void OnSettingButtonClick(object sender, RoutedEventArgs e) {
 
         }
@@ -79,41 +90,72 @@ namespace ShikiManager {
             base.Hide();
         }
 
-        public void ShowText(TextHookData textHookData) {
+        public async void ShowText(TextHookData textHookData) {
             if (DataManager.Instance.SelectHeadDataList.Contains(textHookData.HeadData)) {
                 var filterFunc = DataManager.Instance.TextFilterFunc;
-                var meCabNodes = DataManager.Instance.MeCabUniDic22Wrapper.ParseSentence(filterFunc == null ? textHookData.TextData : filterFunc(textHookData.TextData));
+                nowOriText = filterFunc == null ? textHookData.TextData : filterFunc(textHookData.TextData);
+                var meCabNodes = DataManager.Instance.MeCabUniDic22Wrapper.ParseSentence(nowOriText);
 
                 // PrintMeCabNodes(meCabNodes);
 
-                Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
-                    TextWarpPanel.Children.Clear();
+                // Add jp
+                await Application.Current.Dispatcher.BeginInvoke(() => {
+                    TextWarpPanel1.Children.Clear();
 
                     foreach (var meCabNode in meCabNodes) {
                         var tmpStackPanel = new StackPanel();
                         tmpStackPanel.Orientation = Orientation.Vertical;
 
-                        var textBlock1 = new TextBox();
-                        textBlock1.BorderThickness = new Thickness(0);
-                        textBlock1.IsReadOnly = true;
-                        textBlock1.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                        textBlock1.Text = $"{meCabNode.Surface}";
-                        tmpStackPanel.Children.Add(textBlock1);
+                        var textBox1 = new TextBox();
+                        textBox1.BorderThickness = new Thickness(0);
+                        textBox1.IsReadOnly = true;
+                        textBox1.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                        textBox1.Text = meCabNode.Surface;
+                        textBox1.PreviewMouseDoubleClick += OnTextBlockPreviewMouseDoubleClick;
+                        tmpStackPanel.Children.Add(textBox1);
 
-                        var textBlock2 = new TextBox();
-                        textBlock2.BorderThickness = new Thickness(0);
-                        textBlock2.IsReadOnly = true;
-                        textBlock2.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                        textBlock2.Text = $"{meCabNode.LForm}";
-                        tmpStackPanel.Children.Add(textBlock2);
+                        var textBox2 = new TextBox();
+                        textBox2.BorderThickness = new Thickness(0);
+                        textBox2.IsReadOnly = true;
+                        textBox2.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                        textBox2.Text = meCabNode.Pron;
+                        textBox2.PreviewMouseDoubleClick += OnTextBlockPreviewMouseDoubleClick;
+                        tmpStackPanel.Children.Add(textBox2);
 
                         var border = new Border();
                         border.Margin = new Thickness(5, 2, 5, 2);
                         border.Child = tmpStackPanel;
 
-                        TextWarpPanel.Children.Add(border);
+                        TextWarpPanel1.Children.Add(border);
                     }
-                }), textHookData);
+                });
+
+                // Add zh
+                TranslatorHelper.Instance.Translators.TryGetValue("Youdao_Public", out ITranslator? translator);
+                var tmpText = await translator?.TranslateAsync(nowOriText); // TODO
+                nowTransText = tmpText ?? (translator?.GetLastError() ?? string.Empty);
+
+                await Application.Current.Dispatcher.BeginInvoke(() => {
+                    TextWarpPanel2.Children.Clear();
+
+                    var textBox = new TextBox();
+                    textBox.BorderThickness = new Thickness(0);
+                    textBox.IsReadOnly = true;
+                    textBox.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                    textBox.TextWrapping = TextWrapping.Wrap;
+                    textBox.Text = nowTransText;
+
+                    TextWarpPanel2.Children.Add(textBox);
+                });
+            }
+        }
+
+        private void OnTextBlockPreviewMouseDoubleClick(object sender, RoutedEventArgs e) {
+            if(sender != null) {
+                var text = (sender as TextBox)?.Text;
+                if (text != null) {
+                    Clipboard.SetText(text);
+                }
             }
         }
 

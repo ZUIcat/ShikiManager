@@ -52,40 +52,80 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        Grid.Column="0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        Opacity="{Binding Path=Value, ElementName=AlphaSlider}">
+            <DockPanel
+                Grid.Row="0"
+                Grid.Column="0"
+            >
+                <StackPanel
+                    DockPanel.Dock="Left"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Opacity="{Binding Path=Value, ElementName=AlphaSlider}"
+                >
 
-                <Slider x:Name="AlphaSlider"
+                    <Button
+                        x:Name="MoveButton"
+                        Content="Move"
+                    />
+
+                    <Button
+                        x:Name="CopyButton"
+                        Content="Copy"
+                    />
+
+                </StackPanel>
+
+                <StackPanel
+                    DockPanel.Dock="Right"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Opacity="{Binding Path=Value, ElementName=AlphaSlider}"
+                >
+
+                    <Slider
+                        x:Name="AlphaSlider"
                         Minimum="0.1"
                         Maximum="1"
                         Value="0.8"
                         Width="200"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center"
+                    />
 
-                <Button x:Name="MoveButton"
-                    Content="Move"/>
+                    <Button
+                        x:Name="SettingButton"
+                        Content="Setting"
+                    />
 
-                <Button x:Name="SettingButton"
-                    Content="Setting"/>
+                    <Button
+                        x:Name="HideButton"
+                        Content="Hide"
+                    />
 
-                <Button x:Name="HideButton"
-                    Content="Hide"/>
+                </StackPanel>
 
-            </StackPanel>
+            </DockPanel>
 
-            <Border Margin="10 10 10 10"
+            <Border
+                Margin="10 10 10 10"
                 Grid.Row="1"
-                Grid.Column="0">
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                              VerticalScrollBarVisibility="Auto">
-                    <WrapPanel x:Name="TextWarpPanel">
-                        <Border Margin="1 1 1 1">
-                            <TextBlock Text="点击游戏以显示文本……"/>
-                        </Border>
-                    </WrapPanel>
+                Grid.Column="0"
+            >
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto"
+                >
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel x:Name="TextWarpPanel1">
+                            <Border Margin="1 1 1 1">
+                                <TextBlock Text="点击游戏以显示原始文本……"/>
+                            </Border>
+                        </WrapPanel>
+                        <WrapPanel x:Name="TextWarpPanel2">
+                            <Border Margin="1 1 1 1">
+                                <TextBlock Text="点击游戏以显示翻译文本……"/>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </Border>
         </Grid>
