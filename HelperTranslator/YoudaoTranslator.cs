@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text.Unicode;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace HelperTranslator {
     public class YoudaoTranslator : ITranslator {
         public string? ErrorText { get; private set; }
 
-        public ITranslator Init() {
+        private StringBuilder tmpSB = new(32);
+
+        public ITranslator? Init(string parm1, string parm2) {
             return this;
         }
 
@@ -22,49 +18,52 @@ namespace HelperTranslator {
                 return null;
             }
 
-            if (srcLang == "zh") srcLang = "ZH_CN";
-            if (desLang == "zh") desLang = "ZH_CN";
             if (srcLang == "jp") srcLang = "JA";
             if (desLang == "jp") desLang = "JA";
-            if (srcLang == "ja") srcLang = "JA";
-            if (desLang == "ja") desLang = "JA";
-
-            string retString;
+            if (srcLang == "zh") srcLang = "ZH_CN";
+            if (desLang == "zh") desLang = "ZH_CN";
 
             string transType = $"{srcLang}2{desLang}".ToUpper();
             string queryText = HttpUtility.UrlEncode(sourceText);
-            string url = "https://fanyi.youdao.com/translate?&doctype=json&type=" + transType + "&i=" + queryText;
+            string queryUrl = $"https://fanyi.youdao.com/translate?&doctype=json&type={transType}&i={queryText}";
 
+            string retData;
             try {
-                retString = await TranslatorHelper.Instance.MyHttpClient.GetStringAsync(url);
+                retData = await TranslatorHelper.Instance.MyHttpClient.GetStringAsync(queryUrl);
             } catch (HttpRequestException ex) {
-                ErrorText = ex.Message;
+                ErrorText = $"There is a HttpRequestException!\n{ex.Message}";
                 return null;
             } catch (TaskCanceledException ex) {
+                ErrorText = $"There is a TaskCanceledException!\n{ex.Message}";
+                return null;
+            } catch (Exception ex) {
                 ErrorText = ex.Message;
                 return null;
             }
 
             YoudaoTransResult retInfo;
             try {
-                retInfo = JsonSerializer.Deserialize<YoudaoTransResult>(retString, TranslatorHelper.Instance.JsonSerializerOptions);
-            } catch (JsonException) {
-                ErrorText = "The retInfo deserialize failed!";
+                retInfo = JsonSerializer.Deserialize<YoudaoTransResult>(retData, TranslatorHelper.Instance.JsonSerializerOptions);
+            } catch (JsonException ex) {
+                ErrorText = $"The retInfo deserialize failed!\n{ex.Message}";
+                return null;
+            } catch (Exception ex) {
+                ErrorText = ex.Message;
                 return null;
             }
 
-            if (retInfo.ErrorCode == 0) {
-                var sb = new StringBuilder(32);
-                foreach (var youdaoTransDataList in retInfo.TranslateResult) {
-                    foreach (var youdaoTransDataItem in youdaoTransDataList) {
-                        sb.Append(youdaoTransDataItem.Tgt);
-                    }
-                }
-                return sb.ToString();
-            } else {
-                ErrorText = "ErrorID:" + retInfo.ErrorCode;
+            if (retInfo.ErrorCode != 0) {
+                ErrorText = $"ErrorID: {retInfo.ErrorCode}";
                 return null;
             }
+
+            tmpSB.Clear();
+            foreach (var youdaoTransDataList in retInfo.TranslateResult) {
+                foreach (var youdaoTransDataItem in youdaoTransDataList) {
+                    tmpSB.Append(youdaoTransDataItem.Tgt);
+                }
+            }
+            return tmpSB.ToString();
         }
 
         public string? GetLastError() {

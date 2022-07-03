@@ -2,6 +2,7 @@
 using HelperMeCab;
 using HelperProcess;
 using HelperTextractor;
+using HelperTranslator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,23 @@ namespace ShikiManager {
         public List<TextHookHeadData> SelectHeadDataList { get; private set; }
         public ProcessInfo ProcessInfo { get; set; }
         public Func<string, string>? TextFilterFunc { get; set; }
+        public ITranslator NowTranslator { get; private set; }
 
         // Share Manager
         public ConfigHelper ConfigHelper { get; private set; }
         public TextractorHelper TextractorHelper { get; private set; }
+        public TranslatorHelper TranslatorHelper { get; private set; }
         public MeCabUniDic22Wrapper MeCabUniDic22Wrapper { get; private set; } // TODO IpaDic
 
         private DataManager() {
             SelectHeadDataList = new List<TextHookHeadData>();
+
             ConfigHelper = ConfigHelper.Instance;
+
             TextractorHelper = TextractorHelper.Instance;
+
+            TranslatorHelper = TranslatorHelper.Instance;
+
             MeCabUniDic22Wrapper = null!;
         }
 
@@ -49,8 +57,17 @@ namespace ShikiManager {
         /// <returns>是否成功</returns>
         public bool Create() {
             ConfigHelper.ReadAppConfig();
+
             TextractorHelper.Create(ConfigHelper.AppConfig.TextractorConfig.DirPath);
+
+            // TranslatorHelper.Create();
+            TranslatorHelper.Translators.Add("Youdao_Public", new YoudaoTranslator().Init(null!, null!));
+            TranslatorHelper.Translators.Add("Baidu", new BaiduTranslator().Init(ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.AppId, ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.SecretKey));
+            TranslatorHelper.Translators.TryGetValue(ConfigHelper.AppConfig.TranslatorConfig.NowTranslator, out ITranslator? tmpTranslator);
+            NowTranslator = tmpTranslator ?? TranslatorHelper.Translators["Youdao_Public"]!;
+
             MeCabUniDic22Wrapper = new MeCabUniDic22Wrapper(ConfigHelper.AppConfig.MeCabConfig.DirPath);
+
             return true;
         }
 
@@ -64,8 +81,13 @@ namespace ShikiManager {
             SelectHeadDataList = null!;
 
             ConfigHelper.WriteAppConfig();
+
             TextractorHelper.Destroy();
+
+            TranslatorHelper.Destroy();
+
             MeCabUniDic22Wrapper.Destroy();
+
             return true;
         }
     }

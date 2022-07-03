@@ -38,7 +38,8 @@ namespace HelperConfig {
             AppConfigPath = Path.Combine(AppDataPath, appConfigFileName);
             jsonSerializerOptions = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                WriteIndented = true
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true,
             };
         }
 

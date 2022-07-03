@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HelperTranslator {
     public interface ITranslator {
-        ITranslator Init();
+        ITranslator? Init(string parm1, string parm2);
 
         Task<string?> TranslateAsync(string sourceText, string srcLang= "jp", string desLang="zh");
 

@@ -131,9 +131,12 @@ namespace ShikiManager {
                 });
 
                 // Add zh
-                TranslatorHelper.Instance.Translators.TryGetValue("Youdao_Public", out ITranslator? translator);
-                var tmpText = await translator?.TranslateAsync(nowOriText); // TODO
-                nowTransText = tmpText ?? (translator?.GetLastError() ?? string.Empty);
+                try {
+                    string? tmpText = await DataManager.Instance.NowTranslator.TranslateAsync(nowOriText); // TODO 不知为什么返回 null 就会报错，先 try 起来
+                    nowTransText = tmpText ?? DataManager.Instance.NowTranslator.GetLastError() ?? string.Empty;
+                } catch (Exception e) {
+                    Trace.TraceError(e.Message);
+                }
 
                 await Application.Current.Dispatcher.BeginInvoke(() => {
                     TextWarpPanel2.Children.Clear();
@@ -151,7 +154,7 @@ namespace ShikiManager {
         }
 
         private void OnTextBlockPreviewMouseDoubleClick(object sender, RoutedEventArgs e) {
-            if(sender != null) {
+            if (sender != null) {
                 var text = (sender as TextBox)?.Text;
                 if (text != null) {
                     Clipboard.SetText(text);
