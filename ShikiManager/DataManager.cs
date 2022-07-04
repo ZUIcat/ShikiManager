@@ -30,7 +30,7 @@ namespace ShikiManager {
         public List<TextHookHeadData> SelectHeadDataList { get; private set; }
         public ProcessInfo ProcessInfo { get; set; }
         public Func<string, string>? TextFilterFunc { get; set; }
-        public ITranslator NowTranslator { get; private set; }
+        public ITranslator NowTranslator { get; private set; } = null!;
 
         // Share Manager
         public ConfigHelper ConfigHelper { get; private set; }

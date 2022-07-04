@@ -18,7 +18,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HelperConfig\HelperConfig.csproj" />
+    <ProjectReference Include="..\HelperExternDll\HelperExternDll.csproj" />
+    <ProjectReference Include="..\HelperLocaleEmulator\HelperLocaleEmulator.csproj" />
+    <ProjectReference Include="..\HelperMeCab\HelperMeCab.csproj" />
+    <ProjectReference Include="..\HelperNtleas\HelperNtleas.csproj" />
+    <ProjectReference Include="..\HelperProcess\HelperProcess.csproj" />
     <ProjectReference Include="..\HelperTextractor\HelperTextractor.csproj" />
+    <ProjectReference Include="..\HelperTranslator\HelperTranslator.csproj" />
+    <ProjectReference Include="..\ShikiManager\ShikiManager.csproj" />
   </ItemGroup>
 
 </Project>

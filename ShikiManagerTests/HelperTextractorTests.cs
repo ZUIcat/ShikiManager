@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HelperTextractor.Tests {
     [TestClass()]
-    public class TextDataRegxHandlerTests {
+    public class HelperTextractorTests {
         [TestMethod()]
         public void Remove2SameCharTest() {
             var ss1 = "[[112233]]";

@@ -54,17 +54,17 @@ namespace ShikiManager {
             // Show
             base.Show();
             // Connect
-            DataManager.Instance.TextractorHelper.TextOutputEvent += ShowTextInUI;
+            DataManager.Instance.TextractorHelper.TextOutputEvent += ShowText;
         }
 
         public new void Hide() {
             // Disconnect
-            DataManager.Instance.TextractorHelper.TextOutputEvent -= ShowTextInUI;
+            DataManager.Instance.TextractorHelper.TextOutputEvent -= ShowText;
             // Hide
             base.Hide();
         }
 
-        private void ShowTextInUI(TextHookData textHookData) {
+        private void ShowText(TextHookData textHookData) {
             if(DataManager.Instance.SelectHeadDataList.Contains(textHookData.HeadData)) {
                 Application.Current.Dispatcher.BeginInvoke((Action<TextHookData>)((textHookData) => {
                     OldText.Text = textHookData.TextData;

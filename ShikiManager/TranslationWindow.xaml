@@ -65,12 +65,17 @@
 
                     <Button
                         x:Name="MoveButton"
-                        Content="Move"
+                        Content="移动"
                     />
 
                     <Button
                         x:Name="CopyButton"
-                        Content="Copy"
+                        Content="复制"
+                    />
+
+                    <Button
+                        x:Name="TranslateButton"
+                        Content="翻译"
                     />
 
                 </StackPanel>
@@ -81,6 +86,13 @@
                     HorizontalAlignment="Right"
                     Opacity="{Binding Path=Value, ElementName=AlphaSlider}"
                 >
+
+                    <CheckBox
+                        x:Name="FollowCheckBox"
+                        Content="跟随游戏"
+                        VerticalAlignment="Center"
+                        Padding="0,0,0,0"
+                    />
 
                     <Slider
                         x:Name="AlphaSlider"
@@ -93,12 +105,12 @@
 
                     <Button
                         x:Name="SettingButton"
-                        Content="Setting"
+                        Content="设置"
                     />
 
                     <Button
                         x:Name="HideButton"
-                        Content="Hide"
+                        Content="隐藏"
                     />
 
                 </StackPanel>

@@ -31,9 +31,14 @@ namespace HelperTextractor {
         public event Action<TextHookData>? TextOutputEvent;
 
         /// <summary>
-        /// Textractor 文本存储字典
+        /// Textractor 输出的文本存储字典
         /// </summary>
         public Dictionary<TextHookHeadData, TextHookData> TextractorOutPutDic { get; private set; }
+
+        /// <summary>
+        /// Textractor 输出的最后一次文本
+        /// </summary>
+        public TextHookData? LastTextHookData { get; private set; }
 
         /// <summary>
         /// TextractorHelper 是否暂停处理文本
@@ -116,6 +121,9 @@ namespace HelperTextractor {
             } else {
                 TextractorOutPutDic[textHookData.HeadData] = textHookData;
             }
+
+            // 记录到最后一次输出
+            LastTextHookData = textHookData;
 
             // 调用外部事件
             TextOutputEvent?.Invoke(textHookData);
