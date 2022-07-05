@@ -4,6 +4,7 @@ using System.Web;
 
 namespace HelperTranslator {
     public class BaiduTranslator : ITranslator {
+        public const string NAME = "Baidu";
         private const string BaiduAPI = @"https://fanyi-api.baidu.com/api/trans/vip/translate?";
         private readonly Dictionary<string, string> Error_code_DesText = new() {
             { "52000", "成功。" },

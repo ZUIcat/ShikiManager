@@ -61,10 +61,13 @@ namespace ShikiManager {
             TextractorHelper.Create(ConfigHelper.AppConfig.TextractorConfig.DirPath);
 
             // TranslatorHelper.Create();
-            TranslatorHelper.Translators.Add("Youdao_Public", new YoudaoTranslator().Init(null!, null!));
-            TranslatorHelper.Translators.Add("Baidu", new BaiduTranslator().Init(ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.AppId, ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.SecretKey));
-            TranslatorHelper.Translators.TryGetValue(ConfigHelper.AppConfig.TranslatorConfig.NowTranslator, out ITranslator? tmpTranslator);
-            NowTranslator = tmpTranslator ?? TranslatorHelper.Translators["Youdao_Public"]!;
+            TranslatorHelper.Translators.Add(YoudaoTranslator.NAME, new YoudaoTranslator().Init(null!, null!));
+            TranslatorHelper.Translators.Add(BaiduTranslator.NAME, new BaiduTranslator().Init(
+                ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.AppId ?? string.Empty,
+                ConfigHelper.AppConfig.TranslatorConfig.BaiduConfig.SecretKey ?? string.Empty
+            ));
+            TranslatorHelper.Translators.TryGetValue(ConfigHelper.AppConfig.TranslatorConfig.NowTranslator ?? string.Empty, out ITranslator? tmpTranslator);
+            NowTranslator = tmpTranslator ?? TranslatorHelper.Translators[YoudaoTranslator.NAME]!;
 
             MeCabUniDic22Wrapper = new MeCabUniDic22Wrapper(ConfigHelper.AppConfig.MeCabConfig.DirPath);
 

@@ -4,6 +4,8 @@ using System.Web;
 
 namespace HelperTranslator {
     public class YoudaoTranslator : ITranslator {
+        public const string NAME = "Youdao_Public";
+
         public string? ErrorText { get; private set; }
 
         private StringBuilder tmpSB = new(32);

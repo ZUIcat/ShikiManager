@@ -64,11 +64,6 @@
                 >
 
                     <Button
-                        x:Name="MoveButton"
-                        Content="移动"
-                    />
-
-                    <Button
                         x:Name="CopyButton"
                         Content="复制"
                     />
@@ -76,6 +71,11 @@
                     <Button
                         x:Name="TranslateButton"
                         Content="翻译"
+                    />
+
+                    <Button
+                        x:Name="LogButton"
+                        Content="历史"
                     />
 
                 </StackPanel>
@@ -111,6 +111,11 @@
                     <Button
                         x:Name="HideButton"
                         Content="隐藏"
+                    />
+
+                    <Button
+                        x:Name="MoveButton"
+                        Content="移动"
                     />
 
                 </StackPanel>

@@ -4,8 +4,11 @@
         public BaiduConfig BaiduConfig { get; set; }
 
         public TranslatorConfig() {
-            NowTranslator = "Youdao_Public";
-            BaiduConfig = new();
+            NowTranslator = string.Empty;
+            BaiduConfig = new BaiduConfig() {
+                AppId = string.Empty,
+                SecretKey = string.Empty
+            };
         }
     }
 

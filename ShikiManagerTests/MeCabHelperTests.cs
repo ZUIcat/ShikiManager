@@ -11,7 +11,8 @@ namespace ShikiManagerTests {
     public class MeCabHelperTests {
         [TestMethod()]
         public void Remove2SameCharTest() {
-            MeCabUniDic22Wrapper myMeCabUniDic22Wrapper = new MeCabUniDic22Wrapper(@"C:\_MyWorkSpace\WorkSpace\VisualStudioProjects\ShikiManager\Data\MeCabDic\unidic-csj-3.1.0");
+            var uniDicPath = @"C:\_MyWorkSpace\_WorkSpace\ShikiManager\Data\MeCabDic\unidic-csj-3.1.0";
+            MeCabUniDic22Wrapper myMeCabUniDic22Wrapper = new(uniDicPath);
 
             var ss = "新しい世界と、小さなアパートの部屋で、僕らは二人暮らしを始めた。";
             var meCabNodes = myMeCabUniDic22Wrapper.ParseSentence(ss);

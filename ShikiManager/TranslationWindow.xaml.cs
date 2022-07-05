@@ -37,6 +37,7 @@ namespace ShikiManager {
             TranslateButton.Click += OnTranslateButtonClick;
             SettingButton.Click += OnSettingButtonClick;
             HideButton.Click += OnHideButtonClick;
+            LogButton.Click += OnLogButtonClick;
         }
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e) {
@@ -79,6 +80,10 @@ namespace ShikiManager {
 
         private void OnHideButtonClick(object sender, RoutedEventArgs e) {
             Hide();
+        }
+
+        private void OnLogButtonClick(object sender, RoutedEventArgs e) {
+
         }
 
         public new void Show() {

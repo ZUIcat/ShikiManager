@@ -8,7 +8,12 @@ namespace HelperProcess {
             processInfoList.Clear();
             foreach (var process in Process.GetProcesses()) {
                 if (process.MainWindowHandle != IntPtr.Zero) {
-                    processInfoList.Add(new ProcessInfo { Name = process.ProcessName, ID = process.Id, FileName = process.MainModule.FileName, StartTime = process.StartTime});
+                    processInfoList.Add(new ProcessInfo {
+                        Name = process.ProcessName,
+                        ID = process.Id,
+                        FileName = process.MainModule.FileName,
+                        StartTime = process.StartTime
+                    });
                 }
                 process.Dispose();
             }
